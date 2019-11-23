@@ -4,6 +4,7 @@
 //-------------------------------------------------------------------------------------------------
 PxsBody::PxsBody(const QPointF &p, const QList<PxsBody*> &friends)
     : PxsObject(p, NULL)
+    , mAcceleration(0.0)
     , mMass(0)
     , mFriends(friends)
 {
@@ -20,6 +21,7 @@ bool PxsBody::move(double speed)
 {
     mAngle += mSpin*speed;
 
+    accelerate(speed);
     mPos.setX(mPos.x() + mVelocity.x());
     mPos.setY(mPos.y() + mVelocity.y());
 
@@ -92,4 +94,27 @@ PxsForce PxsBody::gravityTo(PxsBody *other) const
     f.normalize();
     f *= g;
     return f;
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsBody::keyPressEvent(QKeyEvent*)
+{
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsBody::keyReleaseEvent(QKeyEvent *)
+{
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsBody::accelerate(double speed)
+{
+    if (!mAcceleration)
+        return;
+    QMatrix m;
+    m.rotate(mAngle);
+    QPointF acc(0,mAcceleration*speed);
+    acc = acc * m;
+    mVelocity.setX(mVelocity.x() + acc.x());
+    mVelocity.setY(mVelocity.y() + acc.y());
 }

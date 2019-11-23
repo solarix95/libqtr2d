@@ -26,6 +26,7 @@ void PxsCameraShakeEffect::process(QMatrix &matrix)
     float prog = progress();
     matrix.translate(randomizeFloat(mAx*prog),
                      randomizeFloat(mAy*prog));
+
     matrix.rotate(randomizeFloat(mRotation*prog));
 }
 

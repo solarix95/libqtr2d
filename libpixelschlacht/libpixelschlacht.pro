@@ -16,7 +16,8 @@ HEADERS += \
     $$PXS/pxsbody.h \
     $$PXS/pxscamera.h \
     $$PXS/pxscameraeffect.h \
-    $$PXS/pxscamerashakeeffect.h
+    $$PXS/pxscamerashakeeffect.h \
+    $$PXS/pxspolygonbody.h
 
 SOURCES += \
     $$PXS/pxswidget.cc \
@@ -25,4 +26,5 @@ SOURCES += \
     $$PXS/pxsbody.cc \
     $$PXS/pxscamera.cc \
     $$PXS/pxscameraeffect.cc \
-    $$PXS/pxscamerashakeeffect.cc
+    $$PXS/pxscamerashakeeffect.cc \
+    $$PXS/pxspolygonbody.cc

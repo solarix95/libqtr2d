@@ -17,6 +17,9 @@ CameraForm::CameraForm(QWidget *parent) :
 
     mCamera.setAspectMode(PxsCamera::AutoWidth);
     mZone.init();
+
+    ui->pxswidget->setFocusPolicy(Qt::ClickFocus);
+    ui->pxswidget->setFocus();
 }
 
 //-------------------------------------------------------------------------------------------------

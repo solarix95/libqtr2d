@@ -6,7 +6,9 @@
 #define GAME_INTERVAL (1000/60)
 
 //-------------------------------------------------------------------------------------------------
-PxsZone::PxsZone(QObject *parent) : QObject(parent)
+PxsZone::PxsZone(QObject *parent)
+    : QObject(parent)
+    , mInputBody(NULL)
 {
     mLastFps = 0;
     QTimer *t = new QTimer();
@@ -15,16 +17,35 @@ PxsZone::PxsZone(QObject *parent) : QObject(parent)
 }
 
 //-------------------------------------------------------------------------------------------------
-void PxsZone::registerBody(PxsBody *bdy)
+void PxsZone::keyPressEvent(QKeyEvent *event)
 {
+    if (mInputBody)
+        mInputBody->keyPressEvent(event);
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsZone::keyReleaseEvent(QKeyEvent *event)
+{
+    if (mInputBody)
+        mInputBody->keyReleaseEvent(event);
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsZone::registerBody(PxsBody *bdy, bool isInputBody)
+{
+    Q_ASSERT(bdy);
     connect(bdy, SIGNAL(destroyed(QObject*)), this, SLOT(bodyDestroyed(QObject*)));
     mBodies << bdy;
+    if (isInputBody)
+        mInputBody = bdy;
 }
 
 //-------------------------------------------------------------------------------------------------
 void PxsZone::bodyDestroyed(QObject *bdy)
 {
     mBodies.removeAll((PxsBody*)bdy);
+    if (mInputBody == (PxsBody*)bdy)
+        mInputBody = NULL;
 }
 
 //-------------------------------------------------------------------------------------------------

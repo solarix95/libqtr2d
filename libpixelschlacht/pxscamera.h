@@ -6,6 +6,7 @@
 #include <QSizeF>
 #include <QPointF>
 #include <QMatrix>
+#include <QKeyEvent>
 
 class PxsZone;
 class PxsCameraEffect;
@@ -25,6 +26,9 @@ public:
     void    setProjectionRect(const QRect &projection);
     void    render(QPainter &p);
     QPointF center() const;
+
+    void  keyPressEvent(QKeyEvent *event);
+    void  keyReleaseEvent(QKeyEvent *event);
 
 signals:
     void updateRequest();

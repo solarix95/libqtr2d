@@ -1,11 +1,37 @@
 #ifndef PXSPOLYGONBODY_H
 #define PXSPOLYGONBODY_H
 
+#include <QVector>
+#include <QPointF>
+#include <QBrush>
+#include <QPen>
+#include "pxsbody.h"
 
-class PxsPolygonBody
+
+class PxsPolygonBody : public PxsBody
 {
 public:
-    PxsPolygonBody();
+    typedef QVector<QPointF> Points;
+    struct Polygon {
+        QPen             pen;
+        QBrush           brush;
+        Points           points;
+        Polygon(QPen p, QBrush b, const Points &pts)
+            : pen(p), brush(b), points(pts) {}
+    };
+    typedef QList<Polygon> Polygons;
+
+    PxsPolygonBody(const QPointF &p, const QList<PxsBody*> &friends);
+
+    void setPolygons(const Polygons &polygons);
+    virtual QRectF   boundingRect() const override;
+
+protected:
+    virtual void renderModelCentered(QPainter &p) const override;
+
+private:
+    Polygons    mPolygons;
+    QRectF      mBoundingRect;
 };
 
 #endif // PXSPOLYGONBODY_H

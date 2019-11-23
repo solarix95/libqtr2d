@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "pxswidget.h"
 #include "pxscamera.h"
 #include "pxszone.h"
@@ -27,6 +28,28 @@ void PxsWidget::paintEvent(QPaintEvent*)
         return;
 
     mCamera->render(p);
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsWidget::mousePressEvent(QMouseEvent *event)
+{
+    QWidget::mousePressEvent(event);
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsWidget::keyPressEvent(QKeyEvent *event)
+{
+    if (mCamera)
+        mCamera->keyPressEvent(event);
+    QWidget::keyPressEvent(event);
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsWidget::keyReleaseEvent(QKeyEvent *event)
+{
+    if (mCamera)
+        mCamera->keyReleaseEvent(event);
+    QWidget::keyReleaseEvent(event);
 }
 
 //-------------------------------------------------------------------------------------------------

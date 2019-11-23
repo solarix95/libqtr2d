@@ -23,11 +23,15 @@ public:
     virtual QRectF   boundingRect() const = 0;
     virtual PxsForce gravityTo(PxsBody *other) const;
 
+    virtual void keyPressEvent(QKeyEvent *event);
+    virtual void keyReleaseEvent(QKeyEvent *event);
+
 signals:
 
 public slots:
 
 protected:
+    virtual void accelerate(double speed);
     virtual void testCollision();
     virtual void testCollision(PxsBody *other);
     virtual void collideWith(PxsBody *other);

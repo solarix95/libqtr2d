@@ -83,6 +83,20 @@ QPointF PxsCamera::center() const
 }
 
 //-------------------------------------------------------------------------------------------------
+void PxsCamera::keyPressEvent(QKeyEvent *event)
+{
+    if (mZone)
+        mZone->keyPressEvent(event);
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsCamera::keyReleaseEvent(QKeyEvent *event)
+{
+    if (mZone)
+        mZone->keyReleaseEvent(event);
+}
+
+//-------------------------------------------------------------------------------------------------
 void PxsCamera::setAspectMode(int mode)
 {
     Q_ASSERT(mode >= IgnoreAspectRatio);

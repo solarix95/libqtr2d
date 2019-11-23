@@ -19,6 +19,11 @@ public:
     inline QSize            fieldSize() const { return mFieldSize; }
     inline int              fps() const       { return mLastFps;   }
 
+    // User events
+    virtual void keyPressEvent(QKeyEvent *event);
+    virtual void keyReleaseEvent(QKeyEvent *event);
+
+
 signals:
     void updateRequest();
     void fieldSizeChanged();
@@ -30,7 +35,7 @@ protected:
     inline void setFieldSize(const QSize &s) { mFieldSize = s; emit fieldSizeChanged(); emit updateRequest(); }
 
     // Creation of new Bodies
-    virtual void registerBody(PxsBody *bdy);
+    virtual void registerBody(PxsBody *bdy, bool isInputBody = false);
 
 private slots:
     void bodyDestroyed(QObject *bdy);
@@ -41,6 +46,7 @@ private:
     void updateGravity();
 
     PxsBodies  mBodies;
+    PxsBody   *mInputBody;
     QSize      mFieldSize;
     QTime      mGameInterval;
     int        mLastFps;
