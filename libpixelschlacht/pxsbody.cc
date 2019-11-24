@@ -2,11 +2,10 @@
 #include <QDebug>
 
 //-------------------------------------------------------------------------------------------------
-PxsBody::PxsBody(const QPointF &p, const QList<PxsBody*> &friends)
-    : PxsObject(p, NULL)
+PxsBody::PxsBody(const QPointF &p, PxsZone &zone)
+    : PxsObject(p, zone)
     , mAcceleration(0.0)
     , mMass(0)
-    , mFriends(friends)
 {
 }
 
@@ -19,11 +18,11 @@ void PxsBody::addGravity(const PxsForce &f)
 //-------------------------------------------------------------------------------------------------
 bool PxsBody::move(double speed)
 {
-    mAngle += mSpin*speed;
+    angle() += spin()*speed;
 
     accelerate(speed);
-    mPos.setX(mPos.x() + mVelocity.x());
-    mPos.setY(mPos.y() + mVelocity.y());
+    pos().setX(pos().x() + velocity().x());
+    pos().setY(pos().y() + velocity().y());
 
     testCollision();
 
@@ -34,10 +33,12 @@ bool PxsBody::move(double speed)
 //-------------------------------------------------------------------------------------------------
 void PxsBody::testCollision()
 {
+    /*
     foreach(PxsBody *other, mFriends) {
         if (other != this)
             other->testCollision(this);
     }
+    */
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -60,12 +61,14 @@ void PxsBody::collideWith(PxsBody *other)
 //-------------------------------------------------------------------------------------------------
 PxsForce PxsBody::collectForces() const
 {
+    /*
     PxsForces f;
     QMatrix m;
     m.translate(0,mAcceleration);
     m.rotate(mAngle);
 
     f << PxsForce(m.dx(),m.dy());
+    */
     PxsForce next;
     return next;
     /*
@@ -86,7 +89,7 @@ PxsForce PxsBody::gravityTo(PxsBody *other) const
 {
     Q_ASSERT(this != other);
 
-    QPointF v = other->mPos - this->mPos;
+    QPointF v = other->pos() - this->pos();
     PxsForce f(v.x(),v.y());
     float d = f.length();
     float g = (other->mMass + this->mMass)/(d*d);
@@ -112,9 +115,10 @@ void PxsBody::accelerate(double speed)
     if (!mAcceleration)
         return;
     QMatrix m;
-    m.rotate(mAngle);
+    m.rotate(angle());
     QPointF acc(0,mAcceleration*speed);
     acc = acc * m;
-    mVelocity.setX(mVelocity.x() + acc.x());
-    mVelocity.setY(mVelocity.y() + acc.y());
+
+    velocity().setX(velocity().x() + acc.x());
+    velocity().setY(velocity().y() + acc.y());
 }

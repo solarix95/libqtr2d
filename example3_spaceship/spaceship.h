@@ -6,7 +6,7 @@
 class Spaceship : public PxsPolygonBody
 {
 public:
-    Spaceship(const QPointF &p, const QList<PxsBody*> &friends);
+    Spaceship(const QPointF &p, PxsZone &zone);
 
     virtual bool move(double speed) override;
     virtual void keyPressEvent(QKeyEvent *event) override;

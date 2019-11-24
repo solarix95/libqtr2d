@@ -6,9 +6,9 @@
 class SimpleBody : public PxsBody
 {
 public:
-    SimpleBody(const QPointF &p, const QList<PxsBody*> &friends);
+    SimpleBody(const QPointF &p, PxsZone &zone);
 
-    virtual QRectF boundingRect() const;
+    virtual QRectF boundingRect() const override;
 
 protected:
     virtual void renderModelCentered(QPainter &p) const override;

@@ -1,15 +1,19 @@
-#ifndef SIMPLEZONE_H
-#define SIMPLEZONE_H
+#ifndef SPACE_ZONE_H
+#define SPACE_ZONE_H
 
 #include "pxszone.h"
 
 class Spacezone : public PxsZone
 {
+    Q_OBJECT
 public:
     Spacezone();
+    virtual ~Spacezone();
 
     virtual void init();
 
+private slots:
+    void createAsteroid();
 };
 
-#endif // SIMPLEZONE_H
+#endif

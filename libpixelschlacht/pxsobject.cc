@@ -2,9 +2,10 @@
 #include <QDebug>
 
 //-------------------------------------------------------------------------------------------------
-PxsObject::PxsObject(const QPointF &p, QObject *parent)
-    : QObject(parent)
+PxsObject::PxsObject(const QPointF &p, PxsZone &zone)
+    : QObject(NULL)
     , mPos(p)
+    , mZone(zone)
     , mAngle(0)
     , mSpin(0)
 {

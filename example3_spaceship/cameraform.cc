@@ -9,7 +9,7 @@ CameraForm::CameraForm(QWidget *parent) :
 {
     ui->setupUi(this);
     mCamera.setZone(&mZone);
-    mCamera.lookTo(QPointF(50,50));
+    mCamera.lookTo(QPointF(100,50));
     ui->pxswidget->setCamera(&mCamera);
 
     connect(ui->btnShake, SIGNAL(clicked(bool)), this, SLOT(shakeIt()));

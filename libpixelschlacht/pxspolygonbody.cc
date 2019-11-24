@@ -1,8 +1,8 @@
 #include "pxspolygonbody.h"
 
 //-------------------------------------------------------------------------------------------------
-PxsPolygonBody::PxsPolygonBody(const QPointF &p, const QList<PxsBody*> &friends)
- : PxsBody(p, friends)
+PxsPolygonBody::PxsPolygonBody(const QPointF &p, PxsZone &zone)
+ : PxsBody(p, zone)
 {
 }
 
@@ -10,7 +10,7 @@ PxsPolygonBody::PxsPolygonBody(const QPointF &p, const QList<PxsBody*> &friends)
 void PxsPolygonBody::setPolygons(const PxsPolygonBody::Polygons &polygons)
 {
     mPolygons     = polygons;
-    mBoundingRect = QRectF();
+    mBoundingTopLeft = mBoundingBottomRight = QPointF();
     if (mPolygons.isEmpty())
         return;
 
@@ -30,13 +30,14 @@ void PxsPolygonBody::setPolygons(const PxsPolygonBody::Polygons &polygons)
         }
     }
 
-    mBoundingRect = QRectF(topLeft,bottomRight);
+    mBoundingTopLeft     = topLeft;
+    mBoundingBottomRight = bottomRight;
 }
 
 //-------------------------------------------------------------------------------------------------
 QRectF PxsPolygonBody::boundingRect() const
 {
-    return mBoundingRect;
+    return QRectF(pos() + mBoundingTopLeft, pos() + mBoundingBottomRight);
 }
 
 //-------------------------------------------------------------------------------------------------

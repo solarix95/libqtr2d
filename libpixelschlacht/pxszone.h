@@ -12,17 +12,17 @@ class PxsZone : public QObject
     Q_OBJECT
 public:
     explicit PxsZone(QObject *parent = nullptr);
+    virtual ~PxsZone();
 
     virtual void init() = 0; // create bodies, setup game, ...
 
     inline const PxsBodies &bodies() const    { return mBodies;    }
-    inline QSize            fieldSize() const { return mFieldSize; }
+    inline const QSize     &fieldSize() const { return mFieldSize; }
     inline int              fps() const       { return mLastFps;   }
 
     // User events
     virtual void keyPressEvent(QKeyEvent *event);
     virtual void keyReleaseEvent(QKeyEvent *event);
-
 
 signals:
     void updateRequest();

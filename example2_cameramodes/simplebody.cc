@@ -4,16 +4,16 @@
 #define LENGTH 10
 
 //-------------------------------------------------------------------------------------------------
-SimpleBody::SimpleBody(const QPointF &p, const QList<PxsBody *> &friends)
- : PxsBody(p,friends)
+SimpleBody::SimpleBody(const QPointF &p, PxsZone &zone)
+ : PxsBody(p,zone)
 {
-    mSpin = 0.1;
+    spin() = 0.1;
 }
 
 //-------------------------------------------------------------------------------------------------
 QRectF SimpleBody::boundingRect() const
 {
-    return QRectF(mPos.x()-10,mPos.y()+10,20,20);
+    return QRectF(pos().x()-10,pos().y()+10,20,20);
 }
 
 //-------------------------------------------------------------------------------------------------

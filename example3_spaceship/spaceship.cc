@@ -4,11 +4,11 @@
 #define LENGTH 10
 
 //-------------------------------------------------------------------------------------------------
-Spaceship::Spaceship(const QPointF &p, const QList<PxsBody *> &friends)
- : PxsPolygonBody(p,friends)
+Spaceship::Spaceship(const QPointF &p, PxsZone &zone)
+ : PxsPolygonBody(p,zone)
  , mFireState(0)
 {
-    mSpin = 1;
+    spin() = 1;
 
     setPolygons(Polygons() << Polygon(QPen(Qt::blue,0.1),
                                       Qt::gray,
@@ -51,10 +51,10 @@ void Spaceship::keyPressEvent(QKeyEvent *event)
     }
 
     if (event->key() == Qt::Key_Left) {
-        mSpin += 0.04;
+        spin() += 0.04;
     }
     if (event->key() == Qt::Key_Right) {
-        mSpin -= 0.04;
+        spin() -= 0.04;
     }
 }
 

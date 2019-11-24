@@ -21,7 +21,7 @@ public:
     };
     typedef QList<Polygon> Polygons;
 
-    PxsPolygonBody(const QPointF &p, const QList<PxsBody*> &friends);
+    PxsPolygonBody(const QPointF &p, PxsZone &zone);
 
     void setPolygons(const Polygons &polygons);
     virtual QRectF   boundingRect() const override;
@@ -31,7 +31,8 @@ protected:
 
 private:
     Polygons    mPolygons;
-    QRectF      mBoundingRect;
+    QPointF     mBoundingTopLeft;
+    QPointF     mBoundingBottomRight;
 };
 
 #endif // PXSPOLYGONBODY_H

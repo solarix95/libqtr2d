@@ -15,11 +15,10 @@ class PxsBody : public PxsObject
 {
     Q_OBJECT
 public:
-    explicit PxsBody(const QPointF &p, const QList<PxsBody*> &friends);
+    explicit PxsBody(const QPointF &p, PxsZone &zone);
 
-    virtual void addGravity(const PxsForce &f);
-    virtual bool move(double speed);
-
+    virtual void     addGravity(const PxsForce &f);
+    virtual bool     move(double speed);
     virtual QRectF   boundingRect() const = 0;
     virtual PxsForce gravityTo(PxsBody *other) const;
 
@@ -40,9 +39,6 @@ protected:
     PxsForces mGravity;
     float     mAcceleration;
     float     mMass;
-
-private:
-    const QList<PxsBody*> &mFriends;
 };
 
 typedef QList<PxsBody*> PxsBodies;

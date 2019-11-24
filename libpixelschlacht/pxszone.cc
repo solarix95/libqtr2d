@@ -1,5 +1,6 @@
 
 #include <QTimer>
+#include <QTime>
 #include "pxszone.h"
 #include "pxsbody.h"
 
@@ -10,10 +11,16 @@ PxsZone::PxsZone(QObject *parent)
     : QObject(parent)
     , mInputBody(NULL)
 {
+    qsrand(QTime::currentTime().minute() + QTime::currentTime().msec());
     mLastFps = 0;
     QTimer *t = new QTimer();
     connect(t, &QTimer::timeout, this, &PxsZone::heartBeat);
     t->start(GAME_INTERVAL);
+}
+
+//-------------------------------------------------------------------------------------------------
+PxsZone::~PxsZone()
+{
 }
 
 //-------------------------------------------------------------------------------------------------

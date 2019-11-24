@@ -15,12 +15,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cc \
     spacezone.cc \
     spaceship.cc \
-    cameraform.cc
+    cameraform.cc \
+    asteroid.cc
 
 HEADERS += \
-    spaceform.h \
+    spacezone.h \
     spaceship.h \
-    cameraform.h
+    cameraform.h \
+    asteroid.h
 
 FORMS += \
     cameraform.ui

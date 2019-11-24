@@ -7,11 +7,12 @@
 #include <QList>
 #include <QVector2D>
 
+class PxsZone;
 class PxsObject : public QObject
 {
     Q_OBJECT
 public:
-    explicit PxsObject(const QPointF &p, QObject *parent = nullptr);
+    explicit PxsObject(const QPointF &p, PxsZone &zone);
 
     void   render(QPainter &p) const;
 
@@ -25,11 +26,18 @@ public:
 
 protected:
     virtual void renderModelCentered(QPainter &p) const = 0;
+    inline QPointF   &pos()      { return mPos;   }
+    inline float     &spin()     { return mSpin;  }
+    inline float     &angle()    { return mAngle; }
+    inline PxsZone   &zone()     { return mZone;  }
+    inline QVector2D &velocity() { return mVelocity; }
 
+private:
     QPointF   mPos;
+    PxsZone  &mZone;
     QVector2D mVelocity;
     float     mAngle; // current angle
-    float     mSpin;  // angle per interval
+    float     mSpin;
 };
 
 typedef QList<PxsObject*> PxsObjects;
