@@ -1,4 +1,5 @@
 #include "pxsbody.h"
+#include "pxszone.h"
 #include <QDebug>
 
 //-------------------------------------------------------------------------------------------------
@@ -33,12 +34,10 @@ bool PxsBody::move(double speed)
 //-------------------------------------------------------------------------------------------------
 void PxsBody::testCollision()
 {
-    /*
-    foreach(PxsBody *other, mFriends) {
+    foreach(PxsBody *other, zone().bodies()) {
         if (other != this)
             other->testCollision(this);
     }
-    */
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -55,7 +54,7 @@ void PxsBody::testCollision(PxsBody *other)
 void PxsBody::collideWith(PxsBody *other)
 {
     Q_ASSERT(this != other);
-    // return boundingRect().intersects(other->boundingRect());
+    // deleteLater();
 }
 
 //-------------------------------------------------------------------------------------------------

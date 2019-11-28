@@ -32,6 +32,7 @@ void PxsCamera::setZone(PxsZone *zone)
     setWindow(mZone->fieldSize());
     connect(mZone, SIGNAL(updateRequest()), this, SIGNAL(updateRequest()));
     connect(mZone, SIGNAL(fieldSizeChanged()), this, SLOT(onFieldSizeChange()));
+    connect(mZone, SIGNAL(requestCameraEffect(PxsCameraEffect*)), this, SLOT(appendEffect(PxsCameraEffect*)));
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -72,6 +73,10 @@ void PxsCamera::render(QPainter &p)
     const PxsBodies &bodies = mZone->bodies();
     foreach(PxsBody *bdy, bodies)
         bdy->render(p);
+
+    const PxsParticles &particles = mZone->particles();
+    foreach(PxsParticle *ptl, particles)
+        ptl->render(p);
 
     p.restore();
 }

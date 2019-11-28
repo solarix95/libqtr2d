@@ -1,6 +1,7 @@
 
 #include <QTimer>
 #include <QTime>
+#include "pxsellipseparticle.h"
 #include "pxszone.h"
 #include "pxsbody.h"
 
@@ -38,6 +39,30 @@ void PxsZone::keyReleaseEvent(QKeyEvent *event)
 }
 
 //-------------------------------------------------------------------------------------------------
+void PxsZone::createParticles(const QRectF &rect, const QVector2D &dir, int count, float radius, QColor c, int durationMs)
+{
+    QPointF pos;
+    for (int i=0; i<count; i++) {
+        QMatrix m;
+        QPointF  p(dir.x(),dir.y());
+        m.rotate(-15 + qrand()%30);
+        m.scale(0.95 + (qrand()%10)/100.0f, 0.95 + (qrand()%10)/100.0f);
+
+        p = p*m;
+        pos.setX(rect.x() + ((qrand()%100)/100.0 * rect.width()));
+        pos.setY(rect.y() + ((qrand()%100)/100.0 * rect.height()));
+        mParticles << new PxsEllipseParticle(pos,QVector2D(p.x(),p.y()),*this,c,durationMs,radius);
+        connect(mParticles.last(),SIGNAL(destroyed(QObject*)), this, SLOT(particleDestroyed(QObject*)));
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsZone::createExplosion(const QPointF &pos, float force)
+{
+    // Subclassing..!
+}
+
+//-------------------------------------------------------------------------------------------------
 void PxsZone::registerBody(PxsBody *bdy, bool isInputBody)
 {
     Q_ASSERT(bdy);
@@ -50,9 +75,15 @@ void PxsZone::registerBody(PxsBody *bdy, bool isInputBody)
 //-------------------------------------------------------------------------------------------------
 void PxsZone::bodyDestroyed(QObject *bdy)
 {
-    mBodies.removeAll((PxsBody*)bdy);
+    mBodies.removeOne((PxsBody*)bdy);
     if (mInputBody == (PxsBody*)bdy)
         mInputBody = NULL;
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsZone::particleDestroyed(QObject *ptl)
+{
+    mParticles.removeOne((PxsParticle*)ptl);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -88,6 +119,11 @@ void PxsZone::process(double time)
 {
     updateGravity();
     foreach(PxsObject *obj, mBodies) {
+        while (obj->move(time)) {
+        }
+    }
+
+    foreach(PxsObject *obj, mParticles) {
         while (obj->move(time)) {
         }
     }

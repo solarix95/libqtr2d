@@ -27,10 +27,14 @@ void PxsObject::render(QPainter &p) const
 //-------------------------------------------------------------------------------------------------
 bool PxsObject::move(double speed)
 {
-    mAngle += mSpin*speed;
+    if (mSpin)
+        mAngle += mSpin*speed;
 
-    mPos.setX(mPos.x() + mVelocity.x());
-    mPos.setY(mPos.y() + mVelocity.y());
+    if (mVelocity.x())
+        mPos.setX(mPos.x() + mVelocity.x());
+
+    if (mVelocity.y())
+        mPos.setY(mPos.y() + mVelocity.y());
 
     return false;
 }
