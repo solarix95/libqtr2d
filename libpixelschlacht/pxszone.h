@@ -5,16 +5,21 @@
 #include <QList>
 #include <QTime>
 #include <QSizeF>
+#include <QPainter>
 #include "pxsbody.h"
 #include "pxsparticle.h"
 
 class PxsCameraEffect;
+class PxsBackground;
+
 class PxsZone : public QObject
 {
     Q_OBJECT
 public:
     explicit PxsZone(QObject *parent = nullptr);
     virtual ~PxsZone();
+
+    void render(QPainter &p);
 
     virtual void init() = 0; // create bodies, setup game, ...
 
@@ -31,6 +36,8 @@ public:
     virtual void createParticles(const QRectF &rect, const QVector2D &dir, int count, float radius, QColor c, int durationMs);
     virtual void createExplosion(const QPointF &pos, float force);
 
+    virtual void appendBackground(PxsBackground *bk);
+
 signals:
     void updateRequest();
     void fieldSizeChanged();
@@ -45,6 +52,9 @@ protected:
     // Creation of new Bodies
     virtual void registerBody(PxsBody *bdy, bool isInputBody = false);
 
+    virtual void renderBackground(QPainter &p);
+    virtual void renderPlayers(QPainter &p);
+
 private slots:
     void bodyDestroyed(QObject *bdy);
     void particleDestroyed(QObject *bdy);
@@ -54,13 +64,14 @@ private slots:
 private:
     void updateGravity();
 
-    PxsBodies    mBodies;
-    PxsBody     *mInputBody;
-    PxsParticles mParticles;
+    PxsBodies      mBodies;
+    PxsBody       *mInputBody;
+    PxsParticles   mParticles;
+    PxsBackground *mBackground;
 
-    QSize        mFieldSize;
-    QTime        mGameInterval;
-    int          mLastFps;
+    QSize          mFieldSize;
+    QTime          mGameInterval;
+    int            mLastFps;
 };
 
 #endif

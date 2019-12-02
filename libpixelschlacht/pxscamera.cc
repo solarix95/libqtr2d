@@ -70,13 +70,7 @@ void PxsCamera::render(QPainter &p)
         p.setRenderHint(QPainter::Antialiasing,true);
     p.setMatrix(mMatrix);
 
-    const PxsBodies &bodies = mZone->bodies();
-    foreach(PxsBody *bdy, bodies)
-        bdy->render(p);
-
-    const PxsParticles &particles = mZone->particles();
-    foreach(PxsParticle *ptl, particles)
-        ptl->render(p);
+    mZone->render(p);
 
     p.restore();
 }

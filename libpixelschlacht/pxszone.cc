@@ -1,6 +1,7 @@
 
 #include <QTimer>
 #include <QTime>
+#include "pxsbackground.h"
 #include "pxsellipseparticle.h"
 #include "pxszone.h"
 #include "pxsbody.h"
@@ -11,6 +12,7 @@
 PxsZone::PxsZone(QObject *parent)
     : QObject(parent)
     , mInputBody(NULL)
+    , mBackground(NULL)
 {
     qsrand(QTime::currentTime().minute() + QTime::currentTime().msec());
     mLastFps = 0;
@@ -22,6 +24,13 @@ PxsZone::PxsZone(QObject *parent)
 //-------------------------------------------------------------------------------------------------
 PxsZone::~PxsZone()
 {
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsZone::render(QPainter &p)
+{
+    renderBackground(p);
+    renderPlayers(p);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -63,6 +72,15 @@ void PxsZone::createExplosion(const QPointF &pos, float force)
 }
 
 //-------------------------------------------------------------------------------------------------
+void PxsZone::appendBackground(PxsBackground *bk)
+{
+    mBackground = bk;
+    mBackground->setZone(this);
+    emit updateRequest();
+}
+
+
+//-------------------------------------------------------------------------------------------------
 void PxsZone::registerBody(PxsBody *bdy, bool isInputBody)
 {
     Q_ASSERT(bdy);
@@ -70,6 +88,23 @@ void PxsZone::registerBody(PxsBody *bdy, bool isInputBody)
     mBodies << bdy;
     if (isInputBody)
         mInputBody = bdy;
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsZone::renderBackground(QPainter &p)
+{
+    if (mBackground)
+        mBackground->render(p);
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsZone::renderPlayers(QPainter &p)
+{
+    foreach(PxsBody *bdy, mBodies)
+        bdy->render(p);
+
+    foreach(PxsParticle *ptl, mParticles)
+        ptl->render(p);
 }
 
 //-------------------------------------------------------------------------------------------------
