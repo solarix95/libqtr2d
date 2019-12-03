@@ -26,6 +26,7 @@ public:
     inline const PxsBodies    &bodies() const     { return mBodies;     }
     inline const PxsParticles &particles() const  { return mParticles;  }
     inline const QSize        &fieldSize() const  { return mFieldSize;  }
+    inline QRect               fieldRect() const  { return QRect(0,0,mFieldSize.width(),mFieldSize.height()); }
     inline int                 fps() const        { return mLastFps;    }
 
     // User events

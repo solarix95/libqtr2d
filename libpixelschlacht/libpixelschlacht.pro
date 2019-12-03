@@ -4,7 +4,7 @@
 
 QT += widgets
 
-PXS = ../libpixelschlacht
+PXS = ../../libpixelschlacht
 
 INCLUDEPATH += $$PXS
 
