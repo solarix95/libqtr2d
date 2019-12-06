@@ -24,6 +24,9 @@ public:
     virtual bool   move(double speed);
     virtual QRectF boundingRect() const = 0;
 
+signals:
+    void changed(PxsObject *obj);
+
 protected:
     virtual void renderModelCentered(QPainter &p) const = 0;
     inline QPointF   &pos()      { return mPos;   }

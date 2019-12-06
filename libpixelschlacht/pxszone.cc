@@ -1,6 +1,7 @@
 
 #include <QTimer>
 #include <QTime>
+#include <QDebug>
 #include "pxsbackground.h"
 #include "pxsellipseparticle.h"
 #include "pxszone.h"
@@ -81,13 +82,14 @@ void PxsZone::appendBackground(PxsBackground *bk)
 
 
 //-------------------------------------------------------------------------------------------------
-void PxsZone::registerBody(PxsBody *bdy, bool isInputBody)
+PxsBody *PxsZone::registerBody(PxsBody *bdy, bool isInputBody)
 {
     Q_ASSERT(bdy);
     connect(bdy, SIGNAL(destroyed(QObject*)), this, SLOT(bodyDestroyed(QObject*)));
     mBodies << bdy;
     if (isInputBody)
         mInputBody = bdy;
+    return bdy;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -131,7 +133,6 @@ void PxsZone::updateGravity()
             g = mBodies[j]->gravityTo(o);
             if (g.isNull())
                 continue;
-            mBodies[j]->addGravity(g);
             o->addGravity(-g);
         }
     }
@@ -145,7 +146,7 @@ void PxsZone::heartBeat()
         return;
     }
     mLastFps = 1000/mGameInterval.elapsed();
-    process(mGameInterval.elapsed()/GAME_INTERVAL);
+    process(mGameInterval.elapsed()/(float)GAME_INTERVAL);
     mGameInterval.start();
 }
 

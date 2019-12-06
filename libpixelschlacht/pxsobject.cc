@@ -36,6 +36,7 @@ bool PxsObject::move(double speed)
     if (mVelocity.y())
         mPos.setY(mPos.y() + mVelocity.y());
 
+    emit changed(this);
     return false;
 }
 

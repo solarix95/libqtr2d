@@ -36,7 +36,7 @@ protected:
     virtual void collideWith(PxsBody *other);
     virtual PxsForce collectForces() const;
 
-    PxsForces mGravity;
+    PxsForce  mGravity;
     float     mAcceleration;
     float     mMass;
 };

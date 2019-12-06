@@ -51,7 +51,7 @@ protected:
     inline void setFieldSize(const QSize &s) { mFieldSize = s; emit fieldSizeChanged(); emit updateRequest(); }
 
     // Creation of new Bodies
-    virtual void registerBody(PxsBody *bdy, bool isInputBody = false);
+    virtual PxsBody *registerBody(PxsBody *bdy, bool isInputBody = false);
 
     virtual void renderBackground(QPainter &p);
     virtual void renderPlayers(QPainter &p);

@@ -13,7 +13,8 @@ PxsBody::PxsBody(const QPointF &p, PxsZone &zone)
 //-------------------------------------------------------------------------------------------------
 void PxsBody::addGravity(const PxsForce &f)
 {
-    mGravity << f;
+    mGravity.setX(mGravity.x() + f.x());
+    mGravity.setY(mGravity.y() + f.y());
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -22,12 +23,16 @@ bool PxsBody::move(double speed)
     angle() += spin()*speed;
 
     accelerate(speed);
+    velocity().setX(velocity().x() + mGravity.x());
+    velocity().setY(velocity().y() + mGravity.y());
+
     pos().setX(pos().x() + velocity().x());
     pos().setY(pos().y() + velocity().y());
+    emit changed(this);
 
     testCollision();
 
-    mGravity.clear();
+    mGravity = PxsForce(0,0);
     return false;
 }
 
@@ -86,13 +91,14 @@ PxsForce PxsBody::collectForces() const
 //-------------------------------------------------------------------------------------------------
 PxsForce PxsBody::gravityTo(PxsBody *other) const
 {
-    Q_ASSERT(this != other);
+    if (this == other)
+        return PxsForce();
 
     QPointF v = other->pos() - this->pos();
     PxsForce f(v.x(),v.y());
     float d = f.length();
-    float g = (other->mMass + this->mMass)/(d*d);
-
+    float g = this->mMass/(d*d);
+    // float g = qMin(this->mMass/(d*d),.5f);
     f.normalize();
     f *= g;
     return f;
@@ -120,4 +126,5 @@ void PxsBody::accelerate(double speed)
 
     velocity().setX(velocity().x() + acc.x());
     velocity().setY(velocity().y() + acc.y());
+    emit changed(this);
 }

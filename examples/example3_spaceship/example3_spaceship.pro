@@ -6,8 +6,9 @@ TEMPLATE = app
 TARGET   = example3_spaceship
 INCLUDEPATH += .
 CONFIG      += debug
+QT          += widgets
 
-include(../libpixelschlacht/libpixelschlacht.pro)
+include(../../libpixelschlacht/libpixelschlacht.pro)
 
 DEFINES += QT_DEPRECATED_WARNINGS
 

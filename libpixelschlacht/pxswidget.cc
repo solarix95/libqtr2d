@@ -55,12 +55,11 @@ void PxsWidget::keyReleaseEvent(QKeyEvent *event)
 //-------------------------------------------------------------------------------------------------
 void PxsWidget::setCamera(PxsCamera *camera)
 {
-    Q_ASSERT(!mCamera);
-    if (!camera)
+    mCamera = camera;
+    if (!mCamera)
         return;
 
-    mCamera = camera;
-    connect(mCamera, SIGNAL(updateRequest()), this, SLOT(update()));
+    connect(mCamera, SIGNAL(updateRequest()), this, SLOT(update()), Qt::UniqueConnection);
     mCamera->setProjectionRect(rect());
 }
 
