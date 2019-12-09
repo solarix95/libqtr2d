@@ -61,8 +61,7 @@ void PxsZone::createParticles(const QRectF &rect, const QVector2D &dir, int coun
         p = p*m;
         pos.setX(rect.x() + ((qrand()%100)/100.0 * rect.width()));
         pos.setY(rect.y() + ((qrand()%100)/100.0 * rect.height()));
-        mParticles << new PxsEllipseParticle(pos,QVector2D(p.x(),p.y()),*this,c,durationMs,radius);
-        connect(mParticles.last(),SIGNAL(destroyed(QObject*)), this, SLOT(particleDestroyed(QObject*)));
+        registerObject(new PxsEllipseParticle(pos,QVector2D(p.x(),p.y()),*this,c,durationMs,radius));
     }
 }
 
@@ -80,16 +79,20 @@ void PxsZone::appendBackground(PxsBackground *bk)
     emit updateRequest();
 }
 
-
 //-------------------------------------------------------------------------------------------------
 PxsBody *PxsZone::registerBody(PxsBody *bdy, bool isInputBody)
 {
-    Q_ASSERT(bdy);
-    connect(bdy, SIGNAL(destroyed(QObject*)), this, SLOT(bodyDestroyed(QObject*)));
-    mBodies << bdy;
+    registerObject(bdy);
     if (isInputBody)
         mInputBody = bdy;
     return bdy;
+}
+
+//-------------------------------------------------------------------------------------------------
+PxsParticle *PxsZone::registerParticle(PxsParticle *ptcl)
+{
+    registerObject(ptcl);
+    return ptcl;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -107,6 +110,26 @@ void PxsZone::renderPlayers(QPainter &p)
 
     foreach(PxsParticle *ptl, mParticles)
         ptl->render(p);
+}
+
+//-------------------------------------------------------------------------------------------------
+PxsObject *PxsZone::registerObject(PxsObject *obj)
+{
+    Q_ASSERT(obj);
+
+    PxsBody *bdy = dynamic_cast<PxsBody*>(obj);
+    if (bdy) {
+        connect(obj, SIGNAL(destroyed(QObject*)), this, SLOT(bodyDestroyed(QObject*)));
+        mBodies << bdy;
+    }
+    PxsParticle *ptcl = dynamic_cast<PxsParticle*>(obj);
+    if (ptcl) {
+        connect(obj, SIGNAL(destroyed(QObject*)), this, SLOT(particleDestroyed(QObject*)));
+        mParticles << ptcl;
+    }
+    connect(obj, SIGNAL(created(PxsObject*)), this, SLOT(registerObject(PxsObject*)));
+
+    return obj;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -131,9 +154,12 @@ void PxsZone::updateGravity()
         PxsBody *o = mBodies.at(i);
         for (int j=i+1; j<mBodies.count(); j++) {
             g = mBodies[j]->gravityTo(o);
-            if (g.isNull())
-                continue;
-            o->addGravity(-g);
+            if (!g.isNull())
+                o->addGravity(-g);
+
+            g = o->gravityTo(mBodies[j]);
+            if (!g.isNull())
+                mBodies[j]->addGravity(-g);
         }
     }
 }

@@ -38,6 +38,7 @@ public slots:
     void setAntialiasingEnabled(bool enabled);
     void setZone(PxsZone *zone);
     void lookTo(const QPointF &center);
+    void rotate(float angle);
     void setWindow(const QSize &windowRect);
     void appendEffect(PxsCameraEffect *e);
 
@@ -53,6 +54,7 @@ private:
     QPointF         mCenter;
     QRect           mProjectionRect;
     QSize           mWindowRect;
+    float           mRotation;
     AspectRatioMode mAspectMode;
     bool            mAntialiasingEnabled;
 

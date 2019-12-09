@@ -7,6 +7,8 @@ PxsBody::PxsBody(const QPointF &p, PxsZone &zone)
     : PxsObject(p, zone)
     , mAcceleration(0.0)
     , mMass(0)
+    , mCollisionType(RectCollision)
+    , mCollisionRadius(0)
 {
 }
 
@@ -37,6 +39,12 @@ bool PxsBody::move(double speed)
 }
 
 //-------------------------------------------------------------------------------------------------
+QRectF PxsBody::collisionRect() const
+{
+    return boundingRect();
+}
+
+//-------------------------------------------------------------------------------------------------
 void PxsBody::testCollision()
 {
     foreach(PxsBody *other, zone().bodies()) {
@@ -49,17 +57,40 @@ void PxsBody::testCollision()
 void PxsBody::testCollision(PxsBody *other)
 {
     Q_ASSERT(this != other);
-    if (this->boundingRect().intersects(other->boundingRect())) {
-        this->collideWith(other);
-        other->collideWith(this);
+    if (QVector2D(this->pos() - other->pos()).length() > (this->mCollisionRadius + other->mCollisionRadius))
+        return;
+
+    // Rect/Rect Collision
+    if (this->mCollisionType == RectCollision && other->mCollisionType == RectCollision) {
+        if (this->collisionRect().intersects(other->collisionRect()))
+            this->collideWith(other);
+        return;
     }
+
+    // Radial/Radial
+    if (this->mCollisionType == RadialCollision && other->mCollisionType == RadialCollision) {
+        this->collideWith(other);
+        return;
+    }
+
+    // Rect/Radial
+    PxsBody *rectBody  = this->mCollisionType == RectCollision ? this : other;
+    PxsBody *radialBody = rectBody == this ? other : this;
+
+
 }
 
 //-------------------------------------------------------------------------------------------------
 void PxsBody::collideWith(PxsBody *other)
 {
     Q_ASSERT(this != other);
-    // deleteLater();
+    this->onCollision(other);
+    other->onCollision(this);
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsBody::onCollision(PxsBody *)
+{
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -44,19 +44,23 @@ signals:
     void fieldSizeChanged();
     void requestCameraEffect(PxsCameraEffect*);
 
-public slots:
+protected slots:
+        PxsObject *registerObject(PxsObject *obj);
 
 protected:
     // Basic Setup
     inline void setFieldSize(const QSize &s) { mFieldSize = s; emit fieldSizeChanged(); emit updateRequest(); }
 
     // Creation of new Bodies
-    virtual PxsBody *registerBody(PxsBody *bdy, bool isInputBody = false);
+    virtual PxsBody     *registerBody(PxsBody *bdy, bool isInputBody = false);
+    virtual PxsParticle *registerParticle(PxsParticle *ptcl);
 
     virtual void renderBackground(QPainter &p);
     virtual void renderPlayers(QPainter &p);
 
+
 private slots:
+
     void bodyDestroyed(QObject *bdy);
     void particleDestroyed(QObject *bdy);
     void heartBeat();

@@ -9,6 +9,7 @@ Spaceship::Spaceship(const QPointF &p, PxsZone &zone)
  , mFireState(0)
 {
     spin() = 1;
+    mCollisionRadius = 12;
 
     setPolygons(Polygons() << Polygon(QPen(Qt::blue,0.1),
                                       Qt::gray,

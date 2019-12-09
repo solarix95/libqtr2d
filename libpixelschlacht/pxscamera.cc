@@ -8,6 +8,7 @@ PxsCamera::PxsCamera(PxsZone *zone, QObject *parent)
     : QObject(parent)
     , mZone(NULL)
     , mCenter(0,0)
+    , mRotation(0)
     , mAspectMode(IgnoreAspectRatio)
     , mAntialiasingEnabled(false)
 {
@@ -40,6 +41,12 @@ void PxsCamera::lookTo(const QPointF &center)
 {
     mCenter = center;
     setupWorldMatrix();
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsCamera::rotate(float angle)
+{
+    mRotation = angle;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -165,7 +172,12 @@ void PxsCamera::setupFullscreenMatrix(const QRect &projectionRect, const QSize &
     mMatrix.scale(dx,-dy);
 
     // from now, we have to use logicacoordinatesl ..!
+
+    // mMatrix.translate(windowRect.width()/2.0,windowRect.height()/2);
+    // mMatrix.rotate(mRotation);
+    // mMatrix.translate(-windowRect.width()/2.0,-windowRect.height()/2);
     QPointF moveVector = QPointF(windowRect.width()/2.0,windowRect.height()/2)-center();
     mMatrix.translate(moveVector.x(), moveVector.y());
+
     // p.setClipRect(0,0,windowRect.width(),windowRect.height());
 }

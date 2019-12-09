@@ -17,15 +17,18 @@ public:
     void   render(QPainter &p) const;
 
     inline const   QPointF  &pos() const      { return mPos;      }
+    inline void              setPos(const QPointF &p) { mPos = p; }
     inline const QVector2D  &velocity() const { return mVelocity; }
-    inline float            angle() const     { return mAngle; }
-    inline float            distanceTo(const PxsObject &oth) const { return (mPos-oth.mPos).manhattanLength(); }
+    inline void              setVelocity(const QVector2D &v) { mVelocity = v; }
+    inline float             angle() const     { return mAngle; }
+    inline float             distanceTo(const PxsObject &oth) const { return (mPos-oth.mPos).manhattanLength(); }
 
     virtual bool   move(double speed);
     virtual QRectF boundingRect() const = 0;
 
 signals:
     void changed(PxsObject *obj);
+    void created(PxsObject *childObj);
 
 protected:
     virtual void renderModelCentered(QPainter &p) const = 0;

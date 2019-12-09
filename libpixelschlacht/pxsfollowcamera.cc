@@ -38,4 +38,5 @@ void PxsFollowCamera::updateCam()
     if (!mFollowMe)
         return;
     lookTo(mFollowMe->pos());
+    rotate(mFollowMe->angle());
 }

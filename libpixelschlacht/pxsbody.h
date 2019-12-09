@@ -20,8 +20,10 @@ public:
     virtual void     addGravity(const PxsForce &f);
     virtual bool     move(double speed);
     virtual QRectF   boundingRect() const = 0;
+    virtual QRectF   collisionRect() const;
     virtual PxsForce gravityTo(PxsBody *other) const;
 
+    // Input Events
     virtual void keyPressEvent(QKeyEvent *event);
     virtual void keyReleaseEvent(QKeyEvent *event);
 
@@ -33,12 +35,23 @@ protected:
     virtual void accelerate(double speed);
     virtual void testCollision();
     virtual void testCollision(PxsBody *other);
-    virtual void collideWith(PxsBody *other);
+
+    void collideWith(PxsBody *other);
+    virtual void onCollision(PxsBody *other);
+
     virtual PxsForce collectForces() const;
 
     PxsForce  mGravity;
     float     mAcceleration;
     float     mMass;
+
+    enum CollisionType {
+        RectCollision,
+        RadialCollision,
+    };
+
+    CollisionType mCollisionType;
+    float         mCollisionRadius;
 };
 
 typedef QList<PxsBody*> PxsBodies;
