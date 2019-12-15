@@ -7,9 +7,7 @@
 #include <QList>
 #include <QVector2D>
 #include "pxsobject.h"
-
-typedef QVector2D        PxsForce;
-typedef QList<QVector2D> PxsForces;
+#include "pxsbasetypes.h"
 
 class PxsBody : public PxsObject
 {

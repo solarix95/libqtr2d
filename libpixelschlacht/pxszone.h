@@ -11,6 +11,7 @@
 
 class PxsCameraEffect;
 class PxsBackground;
+class PxsGravity;
 
 class PxsZone : public QObject
 {
@@ -49,7 +50,8 @@ protected slots:
 
 protected:
     // Basic Setup
-    inline void setFieldSize(const QSize &s) { mFieldSize = s; emit fieldSizeChanged(); emit updateRequest(); }
+    void setFieldSize(const QSize &s) { mFieldSize = s; emit fieldSizeChanged(); emit updateRequest(); }
+    void setGravity(PxsGravity *g);
 
     // Creation of new Bodies
     virtual PxsBody     *registerBody(PxsBody *bdy, bool isInputBody = false);
@@ -72,6 +74,7 @@ private:
     PxsBody       *mInputBody;
     PxsParticles   mParticles;
     PxsBackground *mBackground;
+    PxsGravity    *mGravity;
 
     QSize          mFieldSize;
     QTime          mGameInterval;

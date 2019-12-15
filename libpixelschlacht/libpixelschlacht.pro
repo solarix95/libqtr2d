@@ -22,7 +22,11 @@ HEADERS += \
     $$PXS/pxsparticle.h \
     $$PXS/pxsellipseparticle.h \
     $$PXS/pxsbackground.h \
-    $$PXS/pxsdebugbackground.h
+    $$PXS/pxsdebugbackground.h \
+    $$PXS/pxsgravity.h \
+    $$PXS/pxsmassattraction.h \
+    $$PXS/pxsgravitylist.h \
+    $$PXS/pxsbasetypes.h
 
 SOURCES += \
     $$PXS/pxswidget.cc \
@@ -37,5 +41,8 @@ SOURCES += \
     $$PXS/pxsparticle.cc \
     $$PXS/pxsellipseparticle.cc \
     $$PXS/pxsbackground.cc \
-    $$PXS/pxsdebugbackground.cc
+    $$PXS/pxsdebugbackground.cc \
+    $$PXS/pxsgravity.cc \
+    $$PXS/pxsmassattraction.cc \
+    $$PXS/pxsgravitylist.cc
 

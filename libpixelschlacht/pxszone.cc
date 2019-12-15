@@ -6,6 +6,7 @@
 #include "pxsellipseparticle.h"
 #include "pxszone.h"
 #include "pxsbody.h"
+#include "pxsgravity.h"
 
 #define GAME_INTERVAL (1000/60)
 
@@ -14,6 +15,7 @@ PxsZone::PxsZone(QObject *parent)
     : QObject(parent)
     , mInputBody(NULL)
     , mBackground(NULL)
+    , mGravity(NULL)
 {
     qsrand(QTime::currentTime().minute() + QTime::currentTime().msec());
     mLastFps = 0;
@@ -140,6 +142,13 @@ PxsObject *PxsZone::registerObject(PxsObject *obj)
 }
 
 //-------------------------------------------------------------------------------------------------
+void PxsZone::setGravity(PxsGravity *g)
+{
+    if (mGravity) delete mGravity;
+    mGravity = g;
+}
+
+//-------------------------------------------------------------------------------------------------
 void PxsZone::bodyDestroyed(QObject *bdy)
 {
     mBodies.removeOne((PxsBody*)bdy);
@@ -156,19 +165,9 @@ void PxsZone::particleDestroyed(QObject *ptl)
 //-------------------------------------------------------------------------------------------------
 void PxsZone::updateGravity()
 {
-    PxsForce g;
-    for (int i=0; i<mBodies.count(); i++) {
-        PxsBody *o = mBodies.at(i);
-        for (int j=i+1; j<mBodies.count(); j++) {
-            g = mBodies[j]->gravityTo(o);
-            if (!g.isNull())
-                o->addGravity(-g);
-
-            g = o->gravityTo(mBodies[j]);
-            if (!g.isNull())
-                mBodies[j]->addGravity(-g);
-        }
-    }
+    if (!mGravity)
+        return;
+    mGravity->process(mBodies,mParticles);
 }
 
 //-------------------------------------------------------------------------------------------------
