@@ -28,9 +28,11 @@ bool PxsBody::move(double speed)
     velocity().setX(velocity().x() + mGravity.x());
     velocity().setY(velocity().y() + mGravity.y());
 
-    pos().setX(pos().x() + velocity().x());
-    pos().setY(pos().y() + velocity().y());
-    emit changed(this);
+    QPointF newPos(pos().x() + velocity().x(),pos().y() + velocity().y());
+    if (newPos != pos()) {
+        pos() = newPos;
+        emit changed(this);
+    }
 
     testCollision();
 

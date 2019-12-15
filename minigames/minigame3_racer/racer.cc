@@ -1,18 +1,19 @@
 #include <QDebug>
 #include "racer.h"
-#include "pxsellipseparticle.h"
+#include "smokeparticle.h"
 
 #define LENGTH 10
 #define ORANGE      QColor("#FFA500")
 #define DARK_ORANGE QColor("#FD6A02")
 #define BROWN       QColor("#CD853F")
 
-
 //-------------------------------------------------------------------------------------------------
 Racer::Racer(const QPointF &p, PxsZone &zone)
  : PxsPolygonBody(p,zone)
  , mFireState(0)
  , mWheelPos(0)
+ , mSteering(0)
+ , mRoofSignalAngle(0)
 {
     mCollisionRadius = 12;
 
@@ -54,12 +55,13 @@ Racer::Racer(const QPointF &p, PxsZone &zone)
 //-------------------------------------------------------------------------------------------------
 bool Racer::move(double speed)
 {
-    if (mFireState)
-        mFireState = mFireState == 1 ? 2:1;
+    mRoofSignalAngle += speed * 3;
     mWheelPos += velocity().length()/3.0 * speed;
     if (mWheelPos >= 2)
         mWheelPos = 0;
 
+    if (velocity().length() > 0)
+        angle() += mSteering * speed * 2;
     return PxsPolygonBody::move(speed);
 }
 
@@ -71,12 +73,11 @@ void Racer::keyPressEvent(QKeyEvent *event)
         mFireState = 1;
     }
 
-    if (event->key() == Qt::Key_Left) {
-        angle() += 5;
-    }
-    if (event->key() == Qt::Key_Right) {
-        angle() -= 5;
-    }
+    if (event->key() == Qt::Key_Left)
+        mSteering = 1;
+
+    if (event->key() == Qt::Key_Right)
+        mSteering = -1;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -86,20 +87,14 @@ void Racer::keyReleaseEvent(QKeyEvent *event)
         mAcceleration = -0.02;
         mFireState = 0;
     }
+    if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Right) {
+        mSteering = 0;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
 void Racer::renderModelCentered(QPainter &p) const
 {
-    if (mFireState) {
-        p.save();
-        p.translate(0,-3);
-        p.scale(1,mFireState == 1 ? 0.7:1.0);
-        p.setPen(Qt::yellow);
-        p.setBrush(Qt::yellow);
-        p.drawEllipse(QPointF(0,0),2,3);
-        p.restore();
-    }
     PxsPolygonBody::renderModelCentered(p);
 
     renderWheel(p, QPointF(-4,-5));
@@ -107,7 +102,9 @@ void Racer::renderModelCentered(QPainter &p) const
     renderWheel(p, QPointF(-4, 6));
     renderWheel(p, QPointF( 4, 6));
 
+    renderRoofSignal(p);
 }
+
 
 //-------------------------------------------------------------------------------------------------
 void Racer::accelerate(double speed)
@@ -124,11 +121,13 @@ void Racer::accelerate(double speed)
     v = (v*m)*currentSpeed;
     velocity() = QVector2D(v.x(), v.y());
 
-    int smokeInterval = 1000/(5 + currentSpeed * 10);
+    int smokeInterval = 1000/(10 + currentSpeed * 10);
     if (mSmokeTimer.interval() != smokeInterval) {
         mSmokeTimer.setInterval(smokeInterval);
-        if (mSmokeTimer.interval() > 0)
+        if (mSmokeTimer.interval() > 0 && !mSmokeTimer.isActive())
             mSmokeTimer.start();
+        if (mSmokeTimer.interval() == 0 && mSmokeTimer.isActive())
+            mSmokeTimer.stop();
     }
 }
 
@@ -150,7 +149,7 @@ void Racer::smoke()
         m.reset();
         m.rotate(-40 + qrand()%80);
         dir = QVector2D(dir.toPointF() * m);
-        emit created(new PxsEllipseParticle(pos() + relativePos,dir,zone(),Qt::gray,1500,0.3));
+        emit created(new SmokeParticle(pos() + relativePos,dir,zone(),Qt::gray,1000,0.2));
     }
 }
 
@@ -167,10 +166,26 @@ void Racer::renderWheel(QPainter &p, const QPointF &pos) const
     // p.setWindow(QRect(-1,4,2,-8));
 
     p.setClipRect(QRect(-1,4,2,-8));
+    p.setPen(QPen(Qt::black,0.2));
     p.translate(0,mWheelPos);
-    for (int i=0; i<6; i++) {
-        p.drawLine(-1,4 -i*2,1,4 -i*2);
+    for (int i=0; i<12; i++) {
+        p.drawLine(-1,4 -i,1,4 -i);
     }
+    p.restore();
+}
+
+void Racer::renderRoofSignal(QPainter &p) const
+{
+    p.save();
+    p.translate(0,6);
+    p.rotate(mRoofSignalAngle);
+    p.setPen(QPen(Qt::white,0.1));
+    p.setBrush(Qt::red);
+    p.drawPolygon(QPolygonF(QVector<QPointF>() << QPointF(0,0) << QPointF(1.5,1) << QPointF(1.5,-1)));
+    p.drawPolygon(QPolygonF(QVector<QPointF>() << QPointF(0,0) << QPointF(-1.5,1) << QPointF(-1.5,-1)));
+    p.setPen(QPen(Qt::red,0.3));
+    p.setBrush(QBrush());
+    p.drawEllipse(QPointF(0,0),1.5,1.5);
     p.restore();
 }
 

@@ -9,7 +9,6 @@ public:
     SimpleZone();
 
     virtual void init();
-
 };
 
 #endif // SIMPLEZONE_H

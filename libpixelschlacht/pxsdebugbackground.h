@@ -9,7 +9,7 @@ public:
     PxsDebugBackground(QColor color, int raster, float penSize);
 
   protected:
-    virtual void renderBkgnd(QPainter &p);
+    virtual void renderBkgnd(QPainter &p, const QRectF &window);
 
 private:
     QColor mColor;

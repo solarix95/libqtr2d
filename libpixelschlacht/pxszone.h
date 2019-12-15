@@ -19,7 +19,7 @@ public:
     explicit PxsZone(QObject *parent = nullptr);
     virtual ~PxsZone();
 
-    void render(QPainter &p);
+    void render(QPainter &p, const QRectF &window);
 
     virtual void init() = 0; // create bodies, setup game, ...
 
@@ -55,9 +55,8 @@ protected:
     virtual PxsBody     *registerBody(PxsBody *bdy, bool isInputBody = false);
     virtual PxsParticle *registerParticle(PxsParticle *ptcl);
 
-    virtual void renderBackground(QPainter &p);
-    virtual void renderPlayers(QPainter &p);
-
+    virtual void renderBackground(QPainter &p, const QRectF &window);
+    virtual void renderPlayers(QPainter &p, const QRectF &window);
 
 private slots:
 

@@ -18,12 +18,14 @@ Background::Background(int w, int h, int count)
     }
 }
 //-------------------------------------------------------------------------------------------------
-void Background::renderBkgnd(QPainter &p)
+void Background::renderBkgnd(QPainter &p, const QRectF &window)
 {
     p.setBrush(QColor(0,100,0));
-    p.drawRect(zone().fieldRect());
-
+    p.drawRect(window);
+    // p.drawRect(zone().fieldRect());
     foreach(const Star &s, mStars) {
+        if (!window.contains(s.pos))
+            continue;
         switch(s.type) {
         case Clover: {
             p.setPen(QPen(QColor(0,110,0),0.3));

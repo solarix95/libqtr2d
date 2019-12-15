@@ -52,7 +52,7 @@ void PxsCamera::rotate(float angle)
 //-------------------------------------------------------------------------------------------------
 void PxsCamera::setWindow(const QSize &zoneRect)
 {
-    mWindowRect = zoneRect;
+    mTargetWindowRect = zoneRect;
     setupWorldMatrix();
     emit updateRequest();
 }
@@ -77,7 +77,7 @@ void PxsCamera::render(QPainter &p)
         p.setRenderHint(QPainter::Antialiasing,true);
     p.setMatrix(mMatrix);
 
-    mZone->render(p);
+    mZone->render(p, mCurrentWindowRect);
 
     p.restore();
 }
@@ -134,21 +134,24 @@ void PxsCamera::effectDestroyed(QObject *effect)
 //-------------------------------------------------------------------------------------------------
 void PxsCamera::setupWorldMatrix()
 {
+    if (mProjectionRect.isEmpty() || mTargetWindowRect.isEmpty())
+        return;
+
     switch(mAspectMode) {
     case IgnoreAspectRatio: {
-        setupFullscreenMatrix(mProjectionRect,mWindowRect);
+        setupFullscreenMatrix(mProjectionRect,mTargetWindowRect);
     } break;
     case FitToScreen: {
 
     } break;
     case AutoHeigh: {
-        QSize windowRect = mWindowRect;
-        windowRect.setHeight(mWindowRect.width()*(mProjectionRect.height()/(qreal)mProjectionRect.width()));
+        QSize windowRect = mTargetWindowRect;
+        windowRect.setHeight(mTargetWindowRect.width()*(mProjectionRect.height()/(qreal)mProjectionRect.width()));
         setupFullscreenMatrix(mProjectionRect,windowRect);
     } break;
     case AutoWidth: {
-        QSize windowRect = mWindowRect;
-        windowRect.setWidth(mWindowRect.height()*(mProjectionRect.width()/(qreal)mProjectionRect.height()));
+        QSize windowRect = mTargetWindowRect;
+        windowRect.setWidth(mTargetWindowRect.height()*(mProjectionRect.width()/(qreal)mProjectionRect.height()));
         setupFullscreenMatrix(mProjectionRect,windowRect);
     } break;
     default: Q_ASSERT(0 && "not implemented");
@@ -156,6 +159,11 @@ void PxsCamera::setupWorldMatrix()
 
     foreach(PxsCameraEffect *effect, mEffects)
         effect->process(mMatrix);
+
+    QMatrix invertedM = mMatrix.inverted();
+
+    QRectF boundingScreenRect(mProjectionRect.topLeft()-QPointF(1,1),mProjectionRect.bottomRight()+QPointF(1,1));
+    mCurrentWindowRect = invertedM.mapRect(boundingScreenRect); // QRectF((mProjectionRect.topLeft()-QPointF(1,1))*invertedM, (mProjectionRect.bottomRight() + QPointF(1,1)) * invertedM);
 
     emit updateRequest();
 }
@@ -171,11 +179,12 @@ void PxsCamera::setupFullscreenMatrix(const QRect &projectionRect, const QSize &
     qreal dy = projectionRect.height()/(qreal)windowRect.height();
     mMatrix.scale(dx,-dy);
 
-    // from now, we have to use logicacoordinatesl ..!
+    // from now, we have to use logicacoordinates ..!
 
-    // mMatrix.translate(windowRect.width()/2.0,windowRect.height()/2);
-    // mMatrix.rotate(mRotation);
-    // mMatrix.translate(-windowRect.width()/2.0,-windowRect.height()/2);
+    mMatrix.translate(windowRect.width()/2.0,windowRect.height()/2);
+    mMatrix.rotate(-mRotation);
+    mMatrix.translate(-windowRect.width()/2.0,-windowRect.height()/2);
+
     QPointF moveVector = QPointF(windowRect.width()/2.0,windowRect.height()/2)-center();
     mMatrix.translate(moveVector.x(), moveVector.y());
 

@@ -7,7 +7,7 @@ TARGET   = example1_simple
 INCLUDEPATH += .
 CONFIG      += debug
 
-include(../libpixelschlacht/libpixelschlacht.pro)
+include(../../libpixelschlacht/libpixelschlacht.pro)
 
 DEFINES += QT_DEPRECATED_WARNINGS
 

@@ -14,10 +14,10 @@ void PxsBackground::setZone(const PxsZone *zone)
 }
 
 //-------------------------------------------------------------------------------------------------
-void PxsBackground::render(QPainter &p)
+void PxsBackground::render(QPainter &p, const QRectF &window)
 {
     p.save();
-    renderBkgnd(p);
+    renderBkgnd(p, window);
     p.restore();
 }
 

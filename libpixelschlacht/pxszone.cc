@@ -28,10 +28,10 @@ PxsZone::~PxsZone()
 }
 
 //-------------------------------------------------------------------------------------------------
-void PxsZone::render(QPainter &p)
+void PxsZone::render(QPainter &p, const QRectF &window)
 {
-    renderBackground(p);
-    renderPlayers(p);
+    renderBackground(p, window);
+    renderPlayers(p, window);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -96,20 +96,27 @@ PxsParticle *PxsZone::registerParticle(PxsParticle *ptcl)
 }
 
 //-------------------------------------------------------------------------------------------------
-void PxsZone::renderBackground(QPainter &p)
+void PxsZone::renderBackground(QPainter &p, const QRectF &window)
 {
     if (mBackground)
-        mBackground->render(p);
+        mBackground->render(p, window);
+    else {
+        p.setBrush(Qt::black);
+        p.drawRect(window);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
-void PxsZone::renderPlayers(QPainter &p)
+void PxsZone::renderPlayers(QPainter &p, const QRectF &window)
 {
-    foreach(PxsBody *bdy, mBodies)
-        bdy->render(p);
+    foreach(PxsBody *bdy, mBodies) {
+        if (bdy->boundingRect().intersects(window))
+            bdy->render(p);
+    }
 
-    foreach(PxsParticle *ptl, mParticles)
-        ptl->render(p);
+    foreach(const PxsParticle *ptl, mParticles)
+        if (window.contains(ptl->pos()))
+            ptl->render(p);
 }
 
 //-------------------------------------------------------------------------------------------------

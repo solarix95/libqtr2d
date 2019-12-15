@@ -21,6 +21,7 @@ private:
     PxsCamera        mCam1;
     PxsFollowCamera  mCam2;
     PxsFollowCamera  mCam3;
+    PxsFollowCamera  mCam4;
 };
 
 #endif // GAMEWIDGET_H

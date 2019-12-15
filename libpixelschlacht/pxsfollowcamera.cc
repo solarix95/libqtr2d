@@ -9,12 +9,14 @@ PxsFollowCamera::PxsFollowCamera(PxsZone *zone, QObject *parent)
 }
 
 //----------------------------------------------------------------------------------
-void PxsFollowCamera::followObject(const PxsObject *obj)
+void PxsFollowCamera::followObject(const PxsObject *obj, Options options)
 {
     if (mFollowMe)
         mFollowMe->disconnect(this);
 
     mFollowMe = obj;
+    mOptions  = options;
+
     if (!mFollowMe)
         return;
 
@@ -37,6 +39,10 @@ void PxsFollowCamera::updateCam()
 {
     if (!mFollowMe)
         return;
-    lookTo(mFollowMe->pos());
-    rotate(mFollowMe->angle());
+
+    if (mOptions.testFlag(FollowPosition))
+        lookTo(mFollowMe->pos());
+
+    if (mOptions.testFlag(FollowAngle))
+        rotate(mFollowMe->angle());
 }

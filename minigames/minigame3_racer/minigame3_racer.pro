@@ -17,11 +17,13 @@ SOURCES += \
     gamezone.cc  \
     background.cc \
     racer.cc \
-    gamewidget.cc
+    gamewidget.cc \
+    smokeparticle.cc
 
 HEADERS += \
     gamezone.h   \
     background.h \
     racer.h  \
-    gamewidget.h
+    gamewidget.h \
+    smokeparticle.h
 

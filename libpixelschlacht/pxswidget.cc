@@ -22,10 +22,11 @@ PxsWidget::PxsWidget(PxsCamera *camera, QWidget *parent)
 void PxsWidget::paintEvent(QPaintEvent*)
 {
     QPainter p(this);
-    p.fillRect(rect(), Qt::black);
 
-    if (!mCamera)
+    if (!mCamera) {
+        p.fillRect(rect(), Qt::black);
         return;
+    }
 
     mCamera->render(p);
 }

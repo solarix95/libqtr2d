@@ -23,9 +23,13 @@ private slots:
 
 private:
     void renderWheel(QPainter &p, const QPointF &pos) const;
+    void renderRoofSignal(QPainter &p) const;
+
 
     int    mFireState; // 0 off, 1 low, 2 high
     float  mWheelPos;
+    float  mSteering;
+    float  mRoofSignalAngle;
     QTimer mSmokeTimer;
 };
 

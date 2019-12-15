@@ -11,7 +11,7 @@ public:
 protected:
     virtual void renderModelCentered(QPainter &p) const;
 
-private:
+protected:
     float mRadius;
 
 };

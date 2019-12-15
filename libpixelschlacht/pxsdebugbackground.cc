@@ -11,8 +11,10 @@ PxsDebugBackground::PxsDebugBackground(QColor color, int raster, float pen)
 }
 
 //-------------------------------------------------------------------------------------------------
-void PxsDebugBackground::renderBkgnd(QPainter &p)
+void PxsDebugBackground::renderBkgnd(QPainter &p, const QRectF &window)
 {
+    p.setBrush(Qt::black);
+    p.drawRect(window);
     p.setPen(QPen(mColor,mPenSize));
     p.drawRect(0,0,zone().fieldSize().width(),zone().fieldSize().height());
 

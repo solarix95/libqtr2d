@@ -20,6 +20,13 @@ void Spacezone::init()
 }
 
 //-------------------------------------------------------------------------------------------------
+void Spacezone::renderBackground(QPainter &p, const QRectF &window)
+{
+    p.setBrush(Qt::black);
+    p.drawRect(window);
+}
+
+//-------------------------------------------------------------------------------------------------
 void Spacezone::createAsteroid()
 {
     Asteroid *a = new Asteroid(QPointF(qrand()%fieldSize().width(),qrand()%fieldSize().height()),*this);

@@ -12,14 +12,14 @@ public:
     PxsBackground();
 
     virtual void setZone(const PxsZone *zone);
-    void render(QPainter &p);
+    void render(QPainter &p, const QRectF &window);
 
 signals:
     void updateRequest();
 
 protected:
     const PxsZone &zone() const;
-    virtual void renderBkgnd(QPainter &p) = 0;
+    virtual void renderBkgnd(QPainter &p, const QRectF &window) = 0;
 
 private:
     const PxsZone *mZone;

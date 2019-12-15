@@ -10,7 +10,7 @@ public:
     Background(int w, int h, int count);
 
 protected:
-    virtual void renderBkgnd(QPainter &p);
+    virtual void renderBkgnd(QPainter &p, const QRectF &window);
 
 private:
     enum Type {

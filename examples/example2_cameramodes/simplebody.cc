@@ -20,6 +20,7 @@ QRectF SimpleBody::boundingRect() const
 void SimpleBody::renderModelCentered(QPainter &p) const
 {
     p.setPen(Qt::white);
+    p.drawRect(QRect(-LENGTH,-LENGTH,2*LENGTH,2*LENGTH));
     p.drawLine(-LENGTH,0,LENGTH,0);
     p.drawLine(0,LENGTH,0,-LENGTH);
 }

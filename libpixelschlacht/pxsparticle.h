@@ -14,6 +14,7 @@ public:
 
 protected:
     QColor color() const;
+    float  progress() const;
     float  transparency() const;
 
 private:

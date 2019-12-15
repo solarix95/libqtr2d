@@ -10,8 +10,7 @@ public:
     Asteroid(const QPointF &p, const QVector2D &velocity, PxsZone &zone);
 
 protected:
-    virtual void collideWith(PxsBody *other) override;
-
+    virtual void onCollision(PxsBody *other) override;
 };
 
 #endif // ASTEROID_H

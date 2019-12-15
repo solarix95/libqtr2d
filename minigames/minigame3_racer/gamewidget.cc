@@ -21,6 +21,7 @@ GameWidget::GameWidget(QWidget *parent) : PxsWidget(parent)
     mCam1.setWindow(QSize(800,600));
     mCam2.setWindow(QSize(200,200));
 
+    // mCam2.followObject(mZone.racer(), PxsFollowCamera::Options(PxsFollowCamera::FollowPosition | PxsFollowCamera::FollowAngle));
     mCam2.followObject(mZone.racer());
 }
 

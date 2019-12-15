@@ -28,8 +28,14 @@ QRectF PxsParticle::boundingRect() const
 QColor PxsParticle::color() const
 {
     QColor c = mColor;
-    c.setAlphaF(qMax(1-mTime.elapsed()/(float)mLivetimeMs,0.0f));
+    c.setAlphaF(1-progress());
     return c;
+}
+
+//-------------------------------------------------------------------------------------------------
+float PxsParticle::progress() const
+{
+    return qMin(mTime.elapsed()/(float)mLivetimeMs,1.0f);
 }
 
 //-------------------------------------------------------------------------------------------------

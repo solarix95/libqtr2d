@@ -12,6 +12,9 @@ public:
 
     virtual void init();
 
+protected:
+    virtual void renderBackground(QPainter &p, const QRectF &window);
+
 private slots:
     void createAsteroid();
 };

@@ -53,7 +53,8 @@ private:
     PxsZone        *mZone;
     QPointF         mCenter;
     QRect           mProjectionRect;
-    QSize           mWindowRect;
+    QSize           mTargetWindowRect;
+    QRectF          mCurrentWindowRect;
     float           mRotation;
     AspectRatioMode mAspectMode;
     bool            mAntialiasingEnabled;
