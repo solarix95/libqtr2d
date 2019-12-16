@@ -8,7 +8,7 @@ GameWidget::GameWidget(QWidget *parent) : PxsWidget(parent)
 
     mCam1.lookTo(QPointF(2500,2500));
 
-    mCam1.setAspectMode(PxsCamera::AutoHeigh);
+    mCam1.setAspectMode(PxsCamera::IgnoreAspectRatio);
     mCam2.setAspectMode(PxsCamera::AutoWidth);
 
     mCam1.setAntialiasingEnabled(true);
@@ -18,7 +18,6 @@ GameWidget::GameWidget(QWidget *parent) : PxsWidget(parent)
 
     mZone.init();
 
-    mCam1.setWindow(QSize(2500,2500));
     mCam2.setWindow(QSize(200,200));
 
     // mCam2.followObject(mZone.racer(), PxsFollowCamera::Options(PxsFollowCamera::FollowPosition | PxsFollowCamera::FollowAngle));

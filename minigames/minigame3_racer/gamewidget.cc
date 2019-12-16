@@ -6,7 +6,7 @@ GameWidget::GameWidget(QWidget *parent) : PxsWidget(parent)
     mCam1.setZone(&mZone);
     mCam2.setZone(&mZone);
 
-    mCam1.lookTo(QPointF(800,600));
+    mCam1.lookTo(QPointF(2500,2500));
 
     mCam1.setAspectMode(PxsCamera::AutoHeigh);
     mCam2.setAspectMode(PxsCamera::AutoWidth);

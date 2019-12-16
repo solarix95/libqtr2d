@@ -3,6 +3,7 @@
 
 #define RADIUS 50
 
+//-------------------------------------------------------------------------------------------------
 Planet::Planet(const QPointF &p, PxsZone &zone)
  : PxsBody(p,zone)
 {
@@ -10,13 +11,15 @@ Planet::Planet(const QPointF &p, PxsZone &zone)
     spin() = 0.3;
 }
 
+//-------------------------------------------------------------------------------------------------
 QRectF Planet::boundingRect() const
 {
-    QRectF r(0,0,RADIUS,RADIUS);
+    QRectF r(-RADIUS,-RADIUS,RADIUS*2,RADIUS*2);
     r.translate(pos());
     return r;
 }
 
+//-------------------------------------------------------------------------------------------------
 void Planet::renderModelCentered(QPainter &p) const
 {
     p.setPen(QColor(30,0,0));

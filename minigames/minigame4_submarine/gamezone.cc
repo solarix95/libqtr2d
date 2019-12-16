@@ -24,7 +24,7 @@ void GameZone::init()
     setGravity(new PxsGravityList(PxsForce(0,-1)));
     appendBackground(new Background(new GameMap(":/maps/simple.png")));
 
-    mRacer   = registerBody(new Submarine(QPointF(2500,2500),*this), true);
+    mRacer   = registerBody(new Submarine(QPointF(1000,2500),*this), true);
 }
 
 //-------------------------------------------------------------------------------------------------
