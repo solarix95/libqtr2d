@@ -1,4 +1,5 @@
 #include "swirl.h"
+#include "submarine.h"
 #include "pxszone.h"
 #include "pxscamerarotateeffect.h"
 #include <QDebug>
@@ -36,6 +37,9 @@ void Swirl::onCollision(PxsBody *pdy)
     if (mCurrent)
         return;
 
+    if (dynamic_cast<Submarine*>(pdy) == NULL) // don't react on fishes...!!
+        return;
+
     PxsCameraRotateEffect *eff;
     mCurrent = eff = new PxsCameraRotateEffect(3000);
     connect(mCurrent, SIGNAL(destroyed(QObject*)), this, SLOT(effectDestroyed(QObject*)));
@@ -48,7 +52,7 @@ void Swirl::renderModelCentered(QPainter &p) const
     p.setPen(QPen(Qt::blue, 0.3));
     for (int i = 0; i<3*360; i += 5) {
         p.setOpacity(1-i/(3*360.0));
-        p.drawPoint(QPointF(0,i/100.0));
+        p.drawPoint(QPointF(0,i/50.0));
         p.rotate(5);
     }
     // p.drawEllipse(QPointF(0,0),RADIUS,RADIUS);

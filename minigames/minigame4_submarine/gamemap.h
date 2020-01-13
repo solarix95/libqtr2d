@@ -26,7 +26,8 @@ public:
         Start,
         End,
 
-        Swirl
+        Swirl,
+        Fishes
     };
 
     QList<QPointF> positionsOf(Element e) const;

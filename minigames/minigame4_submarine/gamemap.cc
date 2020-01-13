@@ -44,6 +44,8 @@ void GameMap::initFromFile(const QString &filename)
                mPositions[Start] << QPointF(x*mScale + mScale/2,y*mScale + mScale/2);
            else if (c == Qt::magenta)
                mPositions[Swirl] << QPointF(x*mScale + mScale/2,y*mScale + mScale/2);
+           else if (c == Qt::yellow)
+               mPositions[Fishes] << QPointF(x*mScale + mScale/2,y*mScale + mScale/2);
            else if ((c.red() + c.green() + c.blue()) && c != Qt::white)
                 mRaster[y][x] = new QColor(c);
        }

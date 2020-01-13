@@ -6,6 +6,7 @@
 #include "background.h"
 #include "submarine.h"
 #include "swirl.h"
+#include "fish.h"
 
 //-------------------------------------------------------------------------------------------------
 GameZone::GameZone()
@@ -35,10 +36,15 @@ void GameZone::init()
     setFieldSize(QSize(map->width()*map->scale(),map->height()*map->scale()));
     appendBackground(new Background(map));
 
-    mRacer   = registerBody(new Submarine(map->positionsOf(GameMap::Start).first(),*this), true);
+    foreach(QPointF p, map->positionsOf(GameMap::Fishes))
+        registerBody(new Fish(p,*this));
 
     foreach(QPointF p, map->positionsOf(GameMap::Swirl))
         registerBody(new Swirl(p,*this));
+
+    mRacer   = registerBody(new Submarine(map->positionsOf(GameMap::Start).first(),*this), true);
+
+
 
     mMap = map;
 }
