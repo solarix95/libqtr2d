@@ -19,7 +19,8 @@ SOURCES += \
     background.cc \
     submarine.cc \
     gamewidget.cc \
-    bubble.cc
+    bubble.cc \
+    swirl.cc
 
 HEADERS += \
     gamezone.h   \
@@ -27,7 +28,8 @@ HEADERS += \
     background.h \
     submarine.h  \
     gamewidget.h \
-    bubble.h
+    bubble.h \
+    swirl.h
 
 RESOURCES += \
     submarine.qrc

@@ -8,7 +8,7 @@ class PxsCameraShakeEffect : public PxsCameraEffect
 public:
     PxsCameraShakeEffect(float ax, float ay, float az, float rot, int durationMs);
 
-    virtual void process(QMatrix &matrix);
+    virtual void process(QMatrix &matrix, const QRectF &window) override;
 
 private:
     float progress() const; // 1.0 -> 0.0

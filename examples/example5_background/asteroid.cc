@@ -9,6 +9,7 @@ Asteroid::Asteroid(const QPointF &p, const QVector2D &v, PxsZone &zone)
 {
     spin()     = (-10 + qrand()%20)/20.0;
     velocity() = v;
+    mCollisionRadius = 5;
 
     setPolygons(Polygons() << Polygon(QPen(Qt::darkGray,0.1),
                                       Qt::gray,
@@ -24,7 +25,7 @@ Asteroid::Asteroid(const QPointF &p, const QVector2D &v, PxsZone &zone)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Asteroid::collideWith(PxsBody *other)
+void Asteroid::onCollision(PxsBody *other)
 {
     zone().createParticles(boundingRect(),velocity(),50,0.3,Qt::gray,5000);
     zone().createExplosion(pos(),5);

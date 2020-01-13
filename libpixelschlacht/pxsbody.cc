@@ -2,6 +2,7 @@
 #include "pxszone.h"
 #include <QDebug>
 
+
 //-------------------------------------------------------------------------------------------------
 PxsBody::PxsBody(const QPointF &p, PxsZone &zone)
     : PxsObject(p, zone)
@@ -29,21 +30,11 @@ bool PxsBody::move(double speed)
     velocity().setY(velocity().y() + mGravity.y());
 
     QPointF newPos(pos().x() + velocity().x(),pos().y() + velocity().y());
-    if (newPos != pos()) {
-        pos() = newPos;
-        emit changed(this);
-    }
-
+    updatePosition(newPos);
     testCollision();
 
     mGravity = PxsForce(0,0);
     return false;
-}
-
-//-------------------------------------------------------------------------------------------------
-QRectF PxsBody::collisionRect() const
-{
-    return boundingRect();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -53,6 +44,8 @@ void PxsBody::testCollision()
         if (other != this)
             other->testCollision(this);
     }
+    if (zone().testCollision(this))
+        collideWith(NULL);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -65,7 +58,9 @@ void PxsBody::testCollision(PxsBody *other)
     // Rect/Rect Collision
     if (this->mCollisionType == RectCollision && other->mCollisionType == RectCollision) {
         if (this->collisionRect().intersects(other->collisionRect()))
+        {
             this->collideWith(other);
+        }
         return;
     }
 
@@ -78,8 +73,6 @@ void PxsBody::testCollision(PxsBody *other)
     // Rect/Radial
     PxsBody *rectBody  = this->mCollisionType == RectCollision ? this : other;
     PxsBody *radialBody = rectBody == this ? other : this;
-
-
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -87,7 +80,9 @@ void PxsBody::collideWith(PxsBody *other)
 {
     Q_ASSERT(this != other);
     this->onCollision(other);
-    other->onCollision(this);
+
+    if (other)
+        other->onCollision(this);
 }
 
 //-------------------------------------------------------------------------------------------------

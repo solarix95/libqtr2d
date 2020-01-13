@@ -17,6 +17,7 @@ public:
 protected:
     virtual void renderModelCentered(QPainter &p) const override;
     virtual void accelerate(double speed) override;
+    virtual void onCollision(PxsBody *other) override;
 
 private slots:
     void bubble();

@@ -11,7 +11,7 @@ class PxsCameraEffect : public QObject
 public:
     PxsCameraEffect(int fps = 30);
 
-    virtual void process(QMatrix &matrix) = 0;
+    virtual void process(QMatrix &matrix, const QRectF &window) = 0;
 
 signals:
     void updateRequest();

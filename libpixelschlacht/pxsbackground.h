@@ -5,6 +5,7 @@
 #include <QPainter>
 
 class PxsZone;
+class PxsObject;
 class PxsBackground : public QObject
 {
     Q_OBJECT
@@ -12,6 +13,8 @@ public:
     PxsBackground();
 
     virtual void setZone(const PxsZone *zone);
+    virtual bool testCollision(PxsObject *bdy) const;
+
     void render(QPainter &p, const QRectF &window);
 
 signals:

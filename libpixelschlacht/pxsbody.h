@@ -17,8 +17,6 @@ public:
 
     virtual void     addGravity(const PxsForce &f);
     virtual bool     move(double speed);
-    virtual QRectF   boundingRect() const = 0;
-    virtual QRectF   collisionRect() const;
     virtual PxsForce gravityTo(PxsBody *other) const;
 
     // Input Events

@@ -14,6 +14,12 @@ void PxsBackground::setZone(const PxsZone *zone)
 }
 
 //-------------------------------------------------------------------------------------------------
+bool PxsBackground::testCollision(PxsObject *) const
+{
+    return false;
+}
+
+//-------------------------------------------------------------------------------------------------
 void PxsBackground::render(QPainter &p, const QRectF &window)
 {
     p.save();

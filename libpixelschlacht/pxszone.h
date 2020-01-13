@@ -39,6 +39,7 @@ public:
     virtual void createExplosion(const QPointF &pos, float force);
 
     virtual void appendBackground(PxsBackground *bk);
+    virtual bool testCollision(PxsObject *obj) const;
 
 signals:
     void updateRequest();

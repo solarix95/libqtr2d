@@ -105,7 +105,6 @@ void Racer::renderModelCentered(QPainter &p) const
     renderRoofSignal(p);
 }
 
-
 //-------------------------------------------------------------------------------------------------
 void Racer::accelerate(double speed)
 {

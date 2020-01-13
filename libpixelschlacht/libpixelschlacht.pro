@@ -26,7 +26,8 @@ HEADERS += \
     $$PXS/pxsgravity.h \
     $$PXS/pxsmassattraction.h \
     $$PXS/pxsgravitylist.h \
-    $$PXS/pxsbasetypes.h
+    $$PXS/pxsbasetypes.h \
+    $$PXS/pxscamerarotateeffect.h
 
 SOURCES += \
     $$PXS/pxswidget.cc \
@@ -44,5 +45,6 @@ SOURCES += \
     $$PXS/pxsdebugbackground.cc \
     $$PXS/pxsgravity.cc \
     $$PXS/pxsmassattraction.cc \
-    $$PXS/pxsgravitylist.cc
+    $$PXS/pxsgravitylist.cc \
+    $$PXS/pxscamerarotateeffect.cc
 

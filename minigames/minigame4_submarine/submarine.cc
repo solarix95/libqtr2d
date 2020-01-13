@@ -1,4 +1,5 @@
 #include <QDebug>
+#include "pxszone.h"
 #include "submarine.h"
 #include "bubble.h"
 
@@ -48,6 +49,7 @@ bool Submarine::move(double speed)
     //if (velocity().length() > 0)
     //    angle() += mSteering * speed * 2;
     // velocity() += QVector2D(0,-2 * speed);
+    angle() = (velocity().y() + 0.2) * 30 * speed;
     return PxsPolygonBody::move(speed);
 }
 
@@ -55,7 +57,11 @@ bool Submarine::move(double speed)
 void Submarine::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Space) {
+        if (mAcceleration > 0)
+            return;
+
         mAcceleration = 0.1;
+        velocity() = QVector2D(1,0);
     }
 }
 
@@ -71,24 +77,26 @@ void Submarine::keyReleaseEvent(QKeyEvent *event)
 void Submarine::renderModelCentered(QPainter &p) const
 {
     PxsPolygonBody::renderModelCentered(p);
-
 }
-
 
 //-------------------------------------------------------------------------------------------------
 void Submarine::accelerate(double speed)
 {
-    float currentSpeed = velocity().length();
-    currentSpeed += mAcceleration*speed;
-    if (currentSpeed <= 0)
-        currentSpeed = 0;
-    if (currentSpeed > 2)
-        currentSpeed = 2;
-    QPointF v(0,1);
-    QMatrix   m;
-    m.rotate(angle());
-    v = (v*m)*currentSpeed;
-    velocity() = QVector2D(v.x(), v.y());
+    float vy = mAcceleration > 0 ? 0.2f : qMax(velocity().y(),-0.5f);
+    float vx = qMin(qMax(velocity().x()+float(mAcceleration*speed),0.0f),1.0f);
+    velocity() = QVector2D(vx,vy);
+}
+
+//-------------------------------------------------------------------------------------------------
+void Submarine::onCollision(PxsBody *other)
+{
+    if (!other) {
+        // updatePosition(pos() + QPointF(0,50));
+
+        zone().createExplosion(pos(),2);
+        updatePosition(QPointF(pos().x() - 10*velocity().x(), pos().y() - 10*velocity().y()));
+        velocity() = QVector2D(0,0);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------

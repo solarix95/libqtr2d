@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "pxspolygonbody.h"
 
 //-------------------------------------------------------------------------------------------------
@@ -37,7 +38,10 @@ void PxsPolygonBody::setPolygons(const PxsPolygonBody::Polygons &polygons)
 //-------------------------------------------------------------------------------------------------
 QRectF PxsPolygonBody::boundingRect() const
 {
-    return QRectF(pos() + mBoundingTopLeft, pos() + mBoundingBottomRight);
+    float height = mBoundingTopLeft.y() - mBoundingBottomRight.y();
+    float width  = mBoundingBottomRight.x() - mBoundingTopLeft.x();
+    // qDebug() << QRectF(pos() + mBoundingTopLeft, pos() + mBoundingBottomRight);
+    return QRectF(pos() + mBoundingTopLeft, QSizeF(width, -height));
 }
 
 //-------------------------------------------------------------------------------------------------

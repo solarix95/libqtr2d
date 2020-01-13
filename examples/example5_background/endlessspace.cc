@@ -18,8 +18,11 @@ Endlessspace::Endlessspace(int w, int h, int count)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Endlessspace::renderBkgnd(QPainter &p)
+void Endlessspace::renderBkgnd(QPainter &p, const QRectF &window)
 {
+    p.setBrush(Qt::black);
+    p.setPen(Qt::black);
+    p.drawRect(window);
 
     p.setBrush(Qt::white);
     foreach(const Star &s, mStars) {

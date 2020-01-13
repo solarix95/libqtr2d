@@ -158,7 +158,9 @@ void PxsCamera::setupWorldMatrix()
     }
 
     foreach(PxsCameraEffect *effect, mEffects)
-        effect->process(mMatrix);
+        effect->process(mMatrix, QRectF(mCenter.x()-mTargetWindowRect.width()/2,
+                                        mCenter.y()-mTargetWindowRect.height()/2,
+                                        mTargetWindowRect.width(), mTargetWindowRect.height()));
 
     QMatrix invertedM = mMatrix.inverted();
 

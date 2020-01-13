@@ -22,6 +22,18 @@ void PxsObject::render(QPainter &p) const
     renderModelCentered(p);
 
     p.restore();
+
+    /* Debug
+    p.save();
+    p.setBrush(Qt::transparent);
+    p.setPen(QPen(Qt::blue,0.3));
+    p.drawRect(boundingRect());
+    p.setPen(QPen(Qt::green,0.3));
+    p.drawRect(collisionRect());
+    p.setPen(QPen(Qt::red,2.0));
+    p.drawPoint(collisionRect().topLeft());
+    p.restore();
+    */
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -38,6 +50,28 @@ bool PxsObject::move(double speed)
 
     emit changed(this);
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------
+QRectF PxsObject::collisionRect() const
+{
+    QRectF br = boundingRect();
+
+    float  paddingWidth  = br.width() * 0.1;
+    float  paddingHeight = br.height() * 0.1;
+
+    return QRectF(br.x() + paddingWidth, br.y() + paddingHeight,
+                  br.width() - 2*paddingWidth,
+                  br.height() - 2*paddingHeight);
+}
+
+//-------------------------------------------------------------------------------------------------
+void PxsObject::updatePosition(const QPointF &newPos)
+{
+    if (mPos == newPos)
+        return;
+    mPos = newPos;
+    emit changed(this);
 }
 
 /*

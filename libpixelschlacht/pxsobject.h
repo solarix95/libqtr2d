@@ -21,10 +21,13 @@ public:
     inline const QVector2D  &velocity() const { return mVelocity; }
     inline void              setVelocity(const QVector2D &v) { mVelocity = v; }
     inline float             angle() const     { return mAngle; }
+    inline void              setAngle(float a) { mAngle = a;    }
+    inline void              setSpin(float s)  { mSpin  = s;    }
     inline float             distanceTo(const PxsObject &oth) const { return (mPos-oth.mPos).manhattanLength(); }
 
     virtual bool   move(double speed);
     virtual QRectF boundingRect() const = 0;
+    virtual QRectF collisionRect() const;
 
 signals:
     void changed(PxsObject *obj);
@@ -32,7 +35,8 @@ signals:
 
 protected:
     virtual void renderModelCentered(QPainter &p) const = 0;
-    inline QPointF   &pos()      { return mPos;   }
+    virtual void updatePosition(const QPointF &newPos);
+
     inline float     &spin()     { return mSpin;  }
     inline float     &angle()    { return mAngle; }
     inline PxsZone   &zone()     { return mZone;  }

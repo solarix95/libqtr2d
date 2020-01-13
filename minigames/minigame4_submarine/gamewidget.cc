@@ -14,7 +14,7 @@ GameWidget::GameWidget(QWidget *parent) : PxsWidget(parent)
     mCam1.setAntialiasingEnabled(true);
     mCam2.setAntialiasingEnabled(true);
 
-    setCamera(&mCam1);
+    setCamera(&mCam2);
 
     mZone.init();
 
@@ -31,6 +31,8 @@ void GameWidget::keyPressEvent(QKeyEvent *event)
         setCamera(&mCam1);
     if (event->key() == Qt::Key_F2)
         setCamera(&mCam2);
+    if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Escape)
+        mZone.reset();
 
     PxsWidget::keyPressEvent(event);
 }

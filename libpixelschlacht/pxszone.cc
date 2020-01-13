@@ -82,6 +82,14 @@ void PxsZone::appendBackground(PxsBackground *bk)
 }
 
 //-------------------------------------------------------------------------------------------------
+bool PxsZone::testCollision(PxsObject *obj) const
+{
+    if (mBackground)
+        return mBackground->testCollision(obj);
+    return false;
+}
+
+//-------------------------------------------------------------------------------------------------
 PxsBody *PxsZone::registerBody(PxsBody *bdy, bool isInputBody)
 {
     registerObject(bdy);
