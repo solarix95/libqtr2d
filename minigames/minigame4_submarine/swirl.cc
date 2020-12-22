@@ -1,14 +1,14 @@
 #include "swirl.h"
 #include "submarine.h"
-#include "pxszone.h"
-#include "pxscamerarotateeffect.h"
+#include "qtr2dzone.h"
+#include "qtr2dcamerarotateeffect.h"
 #include <QDebug>
 
 #define RADIUS 10
 
 //-------------------------------------------------------------------------------------------------
-Swirl::Swirl(const QPointF &p, PxsZone &zone)
- : PxsBody(p,zone)
+Swirl::Swirl(const QPointF &p, Qtr2dZone &zone)
+ : Qtr2dBody(p,zone)
  , mCurrent(NULL)
 {
     mCollisionRadius = RADIUS;
@@ -32,7 +32,7 @@ QRectF Swirl::boundingRect() const
 }
 
 //-------------------------------------------------------------------------------------------------
-void Swirl::onCollision(PxsBody *pdy)
+void Swirl::onCollision(Qtr2dBody *pdy)
 {
     if (mCurrent)
         return;
@@ -40,8 +40,8 @@ void Swirl::onCollision(PxsBody *pdy)
     if (dynamic_cast<Submarine*>(pdy) == NULL) // don't react on fishes...!!
         return;
 
-    PxsCameraRotateEffect *eff;
-    mCurrent = eff = new PxsCameraRotateEffect(3000);
+    Qtr2dCameraRotateEffect *eff;
+    mCurrent = eff = new Qtr2dCameraRotateEffect(3000);
     connect(mCurrent, SIGNAL(destroyed(QObject*)), this, SLOT(effectDestroyed(QObject*)));
     emit zone().requestCameraEffect(eff);
 }

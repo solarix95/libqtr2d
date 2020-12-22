@@ -1,6 +1,6 @@
 #include "cameraform.h"
 #include "ui_cameraform.h"
-#include "pxscamerashakeeffect.h"
+#include "qtr2dcamerashakeeffect.h"
 
 //-------------------------------------------------------------------------------------------------
 CameraForm::CameraForm(QWidget *parent) :
@@ -27,5 +27,5 @@ CameraForm::~CameraForm()
 //-------------------------------------------------------------------------------------------------
 void CameraForm::shakeIt()
 {
-    mCamera.appendEffect(new PxsCameraShakeEffect(3,3,0,1,2000));
+    mCamera.appendEffect(new Qtr2dCameraShakeEffect(3,3,0,1,2000));
 }

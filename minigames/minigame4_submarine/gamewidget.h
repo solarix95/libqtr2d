@@ -2,12 +2,12 @@
 #define GAMEWIDGET_H
 
 #include <QWidget>
-#include "pxswidget.h"
-#include "pxscamera.h"
-#include "pxsfollowcamera.h"
+#include "qtr2dwidget.h"
+#include "qtr2dcamera.h"
+#include "qtr2dfollowcamera.h"
 #include "gamezone.h"
 
-class GameWidget : public PxsWidget
+class GameWidget : public Qtr2dWidget
 {
     Q_OBJECT
 public:
@@ -18,8 +18,8 @@ protected:
 
 private:
     GameZone         mZone;
-    PxsCamera        mCam1;
-    PxsFollowCamera  mCam2;
+    Qtr2dCamera        mCam1;
+    Qtr2dFollowCamera  mCam2;
 };
 
 #endif // GAMEWIDGET_H

@@ -1,7 +1,7 @@
 
 #include <QApplication>
-#include "pxswidget.h"
-#include "pxscamera.h"
+#include "qtr2dwidget.h"
+#include "qtr2dcamera.h"
 #include "gamezone.h"
 
 //-------------------------------------------------------------------------------------------------
@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    PxsWidget w;
-    PxsCamera c;
+    Qtr2dWidget w;
+    Qtr2dCamera c;
     GameZone  z;
     c.setZone(&z);
     c.setWindow(QSize(800,600));

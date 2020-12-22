@@ -1,8 +1,8 @@
 #include "smokeparticle.h"
 
 //-------------------------------------------------------------------------------------------------
-SmokeParticle::SmokeParticle(const QPointF &p, const QVector2D &direction, PxsZone &zone, const QColor &c, int livetimeMs, float radius)
- : PxsEllipseParticle(p,direction, zone, c, livetimeMs, radius)
+SmokeParticle::SmokeParticle(const QPointF &p, const QVector2D &direction, Qtr2dZone &zone, const QColor &c, int livetimeMs, float radius)
+ : Qtr2dEllipseParticle(p,direction, zone, c, livetimeMs, radius)
  , mStartRadius(radius)
 {
 }
@@ -11,5 +11,5 @@ SmokeParticle::SmokeParticle(const QPointF &p, const QVector2D &direction, PxsZo
 bool SmokeParticle::move(double speed)
 {
     mRadius = mStartRadius * (1+ 10*progress());
-    return PxsEllipseParticle::move(speed);
+    return Qtr2dEllipseParticle::move(speed);
 }

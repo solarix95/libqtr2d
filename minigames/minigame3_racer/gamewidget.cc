@@ -1,15 +1,15 @@
 #include "gamewidget.h"
 
 //-------------------------------------------------------------------------------------------------
-GameWidget::GameWidget(QWidget *parent) : PxsWidget(parent)
+GameWidget::GameWidget(QWidget *parent) : Qtr2dWidget(parent)
 {
     mCam1.setZone(&mZone);
     mCam2.setZone(&mZone);
 
     mCam1.lookTo(QPointF(2500,2500));
 
-    mCam1.setAspectMode(PxsCamera::AutoHeigh);
-    mCam2.setAspectMode(PxsCamera::AutoWidth);
+    mCam1.setAspectMode(Qtr2dCamera::AutoHeigh);
+    mCam2.setAspectMode(Qtr2dCamera::AutoWidth);
 
     mCam1.setAntialiasingEnabled(true);
     mCam2.setAntialiasingEnabled(true);
@@ -33,5 +33,5 @@ void GameWidget::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_F2)
         setCamera(&mCam2);
 
-    PxsWidget::keyPressEvent(event);
+    Qtr2dWidget::keyPressEvent(event);
 }

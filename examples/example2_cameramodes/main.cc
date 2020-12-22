@@ -1,7 +1,7 @@
 
 #include <QApplication>
-#include "pxswidget.h"
-#include "pxscamera.h"
+#include "qtr2dwidget.h"
+#include "qtr2dcamera.h"
 #include "simplezone.h"
 #include "cameraform.h"
 

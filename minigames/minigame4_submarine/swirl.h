@@ -1,19 +1,19 @@
 #ifndef SWIRL_H
 #define SWIRL_H
 
-#include "pxsbody.h"
+#include "qtr2dbody.h"
 
-class Swirl : public PxsBody
+class Swirl : public Qtr2dBody
 {
     Q_OBJECT
 public:
-    Swirl(const QPointF &p, PxsZone &zone);
+    Swirl(const QPointF &p, Qtr2dZone &zone);
 
     virtual bool move(double speed) override;
     virtual QRectF boundingRect() const override;
 
 protected:
-    virtual void onCollision(PxsBody *pdy) override;
+    virtual void onCollision(Qtr2dBody *pdy) override;
     virtual void renderModelCentered(QPainter &p) const override;
 
 private slots:

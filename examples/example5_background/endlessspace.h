@@ -1,10 +1,10 @@
 #ifndef ENDLESSSPACE_H
 #define ENDLESSSPACE_H
 
-#include "pxsbackground.h"
+#include "qtr2dbackground.h"
 #include <QList>
 
-class Endlessspace : public PxsBackground
+class Endlessspace : public Qtr2dBackground
 {
 public:
     Endlessspace(int w, int h, int count);

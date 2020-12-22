@@ -1,5 +1,5 @@
 #include <QDebug>
-#include "pxszone.h"
+#include "qtr2dzone.h"
 #include "submarine.h"
 #include "bubble.h"
 
@@ -8,8 +8,8 @@
 #define DARK_ORANGE QColor("#FD6A02")
 
 //-------------------------------------------------------------------------------------------------
-Submarine::Submarine(const QPointF &p, PxsZone &zone)
- : PxsPolygonBody(p,zone)
+Submarine::Submarine(const QPointF &p, Qtr2dZone &zone)
+ : Qtr2dPolygonBody(p,zone)
 {
     mCollisionRadius = 9;
 
@@ -50,7 +50,7 @@ bool Submarine::move(double speed)
     //    angle() += mSteering * speed * 2;
     // velocity() += QVector2D(0,-2 * speed);
     angle() = (velocity().y() + 0.2) * 30 * speed;
-    return PxsPolygonBody::move(speed);
+    return Qtr2dPolygonBody::move(speed);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ void Submarine::keyReleaseEvent(QKeyEvent *event)
 //-------------------------------------------------------------------------------------------------
 void Submarine::renderModelCentered(QPainter &p) const
 {
-    PxsPolygonBody::renderModelCentered(p);
+    Qtr2dPolygonBody::renderModelCentered(p);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ void Submarine::accelerate(double speed)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Submarine::onCollision(PxsBody *other)
+void Submarine::onCollision(Qtr2dBody *other)
 {
     if (!other) {
         // updatePosition(pos() + QPointF(0,50));

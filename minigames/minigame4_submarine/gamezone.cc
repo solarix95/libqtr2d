@@ -1,6 +1,6 @@
 
-#include "pxscamerashakeeffect.h"
-#include "pxsgravitylist.h"
+#include "qtr2dcamerashakeeffect.h"
+#include "qtr2dgravitylist.h"
 #include "gamezone.h"
 #include "gamemap.h"
 #include "background.h"
@@ -29,7 +29,7 @@ void GameZone::reset()
 //-------------------------------------------------------------------------------------------------
 void GameZone::init()
 {
-    setGravity(new PxsGravityList(PxsForce(0,-0.01)));
+    setGravity(new Qtr2dGravityList(PxsForce(0,-0.01)));
 
     GameMap *map = new GameMap(":/maps/simple3.png");
 
@@ -52,6 +52,6 @@ void GameZone::init()
 //-------------------------------------------------------------------------------------------------
 void GameZone::createExplosion(const QPointF &pos, float force)
 {
-    emit requestCameraEffect(new PxsCameraShakeEffect(force,force,force,0,force*200));
+    emit requestCameraEffect(new Qtr2dCameraShakeEffect(force,force,force,0,force*200));
 }
 

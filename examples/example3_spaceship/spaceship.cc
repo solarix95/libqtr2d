@@ -4,8 +4,8 @@
 #define LENGTH 10
 
 //-------------------------------------------------------------------------------------------------
-Spaceship::Spaceship(const QPointF &p, PxsZone &zone)
- : PxsPolygonBody(p,zone)
+Spaceship::Spaceship(const QPointF &p, Qtr2dZone &zone)
+ : Qtr2dPolygonBody(p,zone)
  , mFireState(0)
 {
     spin() = 1;
@@ -39,7 +39,7 @@ bool Spaceship::move(double speed)
 {
     if (mFireState)
         mFireState = mFireState == 1 ? 2:1;
-    return PxsPolygonBody::move(speed);
+    return Qtr2dPolygonBody::move(speed);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -81,6 +81,6 @@ void Spaceship::renderModelCentered(QPainter &p) const
         p.drawEllipse(QPointF(0,0),2,3);
         p.restore();
     }
-    PxsPolygonBody::renderModelCentered(p);
+    Qtr2dPolygonBody::renderModelCentered(p);
 }
 

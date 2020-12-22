@@ -2,15 +2,15 @@
 #define UFO_H
 
 #include <QVector2D>
-#include "pxspolygonbody.h"
+#include "qtr2dpolygonbody.h"
 
-class Ufo : public PxsPolygonBody
+class Ufo : public Qtr2dPolygonBody
 {
 public:
-    Ufo(const QPointF &p, const QVector2D &velocity, PxsZone &zone);
+    Ufo(const QPointF &p, const QVector2D &velocity, Qtr2dZone &zone);
 
 protected:
-    virtual void collideWith(PxsBody *other) override;
+    virtual void collideWith(Qtr2dBody *other) override;
 };
 
 #endif

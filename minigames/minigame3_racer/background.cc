@@ -1,5 +1,5 @@
 #include "background.h"
-#include "pxszone.h"
+#include "qtr2dzone.h"
 
 //-------------------------------------------------------------------------------------------------
 Background::Background(int w, int h, int count)

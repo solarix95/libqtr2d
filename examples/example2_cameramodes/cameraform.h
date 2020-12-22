@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include "simplezone.h"
-#include "pxscamera.h"
+#include "qtr2dcamera.h"
 
 namespace Ui {
 class CameraForm;
@@ -23,7 +23,7 @@ private slots:
 private:
     Ui::CameraForm *ui;
 
-    PxsCamera  mCamera;
+    Qtr2dCamera  mCamera;
     SimpleZone mZone;
 };
 

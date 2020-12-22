@@ -1,10 +1,10 @@
 #include <QDebug>
 #include "asteroid.h"
-#include "pxszone.h"
+#include "qtr2dzone.h"
 
 //-------------------------------------------------------------------------------------------------
-Asteroid::Asteroid(const QPointF &p, PxsZone &zone)
- : PxsPolygonBody(p, zone)
+Asteroid::Asteroid(const QPointF &p, Qtr2dZone &zone)
+ : Qtr2dPolygonBody(p, zone)
 {
     spin()     = (-10 + qrand()%20)/20.0;
     velocity() = QVector2D((-10 + qrand()%20)/20.0,(-10 + qrand()%20)/20.0);
@@ -29,5 +29,5 @@ bool Asteroid::move(double speed)
         deleteLater();
     }
 
-    return PxsPolygonBody::move(speed);
+    return Qtr2dPolygonBody::move(speed);
 }

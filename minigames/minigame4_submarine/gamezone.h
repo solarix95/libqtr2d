@@ -1,10 +1,10 @@
 #ifndef GAME_ZONE_H
 #define GAME_ZONE_H
 
-#include "pxszone.h"
+#include "qtr2dzone.h"
 
 class GameMap;
-class GameZone : public PxsZone
+class GameZone : public Qtr2dZone
 {
     Q_OBJECT
 public:
@@ -14,11 +14,11 @@ public:
     void reset();
     virtual void init() override;
     virtual void createExplosion(const QPointF &pos, float force) override;
-    inline PxsBody *racer()   { return mRacer;   }
+    inline Qtr2dBody *racer()   { return mRacer;   }
 
 private:
-    PxsBody  *mRacer;
-    GameMap  *mMap;
+    Qtr2dBody  *mRacer;
+    GameMap    *mMap;
 };
 
 #endif

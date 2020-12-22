@@ -1,10 +1,10 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
-#include "pxsbackground.h"
+#include "qtr2dbackground.h"
 #include <QList>
 
-class Background : public PxsBackground
+class Background : public Qtr2dBackground
 {
 public:
     Background(int w, int h, int count);

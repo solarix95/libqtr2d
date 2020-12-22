@@ -1,5 +1,5 @@
 
-#include "pxscamerashakeeffect.h"
+#include "qtr2dcamerashakeeffect.h"
 #include "gamezone.h"
 #include "background.h"
 #include "racer.h"
@@ -27,6 +27,6 @@ void GameZone::init()
 //-------------------------------------------------------------------------------------------------
 void GameZone::createExplosion(const QPointF &pos, float force)
 {
-    emit requestCameraEffect(new PxsCameraShakeEffect(5,5,5,0,2000));
+    emit requestCameraEffect(new Qtr2dCameraShakeEffect(5,5,5,0,2000));
 }
 

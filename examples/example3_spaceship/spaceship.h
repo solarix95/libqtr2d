@@ -1,12 +1,12 @@
 #ifndef SIMPLEBODY_H
 #define SIMPLEBODY_H
 
-#include "pxspolygonbody.h"
+#include "qtr2dpolygonbody.h"
 
-class Spaceship : public PxsPolygonBody
+class Spaceship : public Qtr2dPolygonBody
 {
 public:
-    Spaceship(const QPointF &p, PxsZone &zone);
+    Spaceship(const QPointF &p, Qtr2dZone &zone);
 
     virtual bool move(double speed) override;
     virtual void keyPressEvent(QKeyEvent *event) override;

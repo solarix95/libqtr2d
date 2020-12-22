@@ -1,9 +1,9 @@
 #ifndef GAME_ZONE_H
 #define GAME_ZONE_H
 
-#include "pxszone.h"
+#include "qtr2dzone.h"
 
-class GameZone : public PxsZone
+class GameZone : public Qtr2dZone
 {
     Q_OBJECT
 public:

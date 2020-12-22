@@ -2,8 +2,8 @@
 #include "fish.h"
 #include <math.h>
 
-Fish::Fish(const QPointF &p, PxsZone &zone)
- : PxsBody(p,zone)
+Fish::Fish(const QPointF &p, Qtr2dZone &zone)
+ : Qtr2dBody(p,zone)
 {
     mCollisionRadius = 20;
     mLiveTime = 0;
@@ -27,7 +27,7 @@ QRectF Fish::boundingRect() const
     return r;
 }
 
-void Fish::onCollision(PxsBody *pdy)
+void Fish::onCollision(Qtr2dBody *pdy)
 {
     if (pdy && (qrand()%20))
         return;

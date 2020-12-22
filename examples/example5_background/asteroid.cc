@@ -1,11 +1,11 @@
 #include <QDebug>
 
 #include "asteroid.h"
-#include "pxszone.h"
+#include "qtr2dzone.h"
 
 //-------------------------------------------------------------------------------------------------
-Asteroid::Asteroid(const QPointF &p, const QVector2D &v, PxsZone &zone)
- : PxsPolygonBody(p, zone)
+Asteroid::Asteroid(const QPointF &p, const QVector2D &v, Qtr2dZone &zone)
+ : Qtr2dPolygonBody(p, zone)
 {
     spin()     = (-10 + qrand()%20)/20.0;
     velocity() = v;
@@ -25,7 +25,7 @@ Asteroid::Asteroid(const QPointF &p, const QVector2D &v, PxsZone &zone)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Asteroid::onCollision(PxsBody *other)
+void Asteroid::onCollision(Qtr2dBody *other)
 {
     zone().createParticles(boundingRect(),velocity(),50,0.3,Qt::gray,5000);
     zone().createExplosion(pos(),5);

@@ -2,15 +2,15 @@
 #define ASTEROID_H
 
 #include <QVector2D>
-#include "pxspolygonbody.h"
+#include "qtr2dpolygonbody.h"
 
-class Asteroid : public PxsPolygonBody
+class Asteroid : public Qtr2dPolygonBody
 {
 public:
-    Asteroid(const QPointF &p, const QVector2D &velocity, PxsZone &zone);
+    Asteroid(const QPointF &p, const QVector2D &velocity, Qtr2dZone &zone);
 
 protected:
-    virtual void onCollision(PxsBody *other) override;
+    virtual void onCollision(Qtr2dBody *other) override;
 };
 
 #endif // ASTEROID_H

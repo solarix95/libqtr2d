@@ -1,11 +1,11 @@
 #include <QDebug>
 
 #include "tank.h"
-#include "pxszone.h"
+#include "qtr2dzone.h"
 
 //-------------------------------------------------------------------------------------------------
-Tank::Tank(const QPointF &p, const QVector2D &v, PxsZone &zone)
- : PxsPolygonBody(p, zone)
+Tank::Tank(const QPointF &p, const QVector2D &v, Qtr2dZone &zone)
+ : Qtr2dPolygonBody(p, zone)
 {
     spin()     = (-10 + qrand()%20)/20.0;
     velocity() = v;
@@ -24,7 +24,7 @@ Tank::Tank(const QPointF &p, const QVector2D &v, PxsZone &zone)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Tank::collideWith(PxsBody *other)
+void Tank::collideWith(Qtr2dBody *other)
 {
     zone().createParticles(boundingRect(),velocity(),50,0.3,Qt::gray,5000);
     zone().createExplosion(pos(),5);

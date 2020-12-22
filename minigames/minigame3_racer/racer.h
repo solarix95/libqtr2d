@@ -1,14 +1,14 @@
 #ifndef RACER_H
 #define RACER_H
 
-#include "pxspolygonbody.h"
+#include "qtr2dpolygonbody.h"
 #include <QTimer>
 
-class Racer : public PxsPolygonBody
+class Racer : public Qtr2dPolygonBody
 {
     Q_OBJECT
 public:
-    Racer(const QPointF &p, PxsZone &zone);
+    Racer(const QPointF &p, Qtr2dZone &zone);
 
     virtual bool move(double speed) override;
     virtual void keyPressEvent(QKeyEvent *event) override;

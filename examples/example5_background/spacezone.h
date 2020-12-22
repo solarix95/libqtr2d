@@ -1,9 +1,9 @@
 #ifndef SPACE_ZONE_H
 #define SPACE_ZONE_H
 
-#include "pxszone.h"
+#include "qtr2dzone.h"
 
-class Spacezone : public PxsZone
+class Spacezone : public Qtr2dZone
 {
     Q_OBJECT
 public:

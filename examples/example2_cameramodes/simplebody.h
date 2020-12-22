@@ -1,12 +1,12 @@
 #ifndef SIMPLEBODY_H
 #define SIMPLEBODY_H
 
-#include "pxsbody.h"
+#include "qtr2dbody.h"
 
-class SimpleBody : public PxsBody
+class SimpleBody : public Qtr2dBody
 {
 public:
-    SimpleBody(const QPointF &p, PxsZone &zone);
+    SimpleBody(const QPointF &p, Qtr2dZone &zone);
 
     virtual QRectF boundingRect() const override;
 

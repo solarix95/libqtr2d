@@ -1,12 +1,12 @@
 #ifndef ASTEROID_H
 #define ASTEROID_H
 
-#include "pxspolygonbody.h"
+#include "qtr2dpolygonbody.h"
 
-class Asteroid : public PxsPolygonBody
+class Asteroid : public Qtr2dPolygonBody
 {
 public:
-    Asteroid(const QPointF &p, PxsZone &zone);
+    Asteroid(const QPointF &p, Qtr2dZone &zone);
 
     virtual bool     move(double speed);
 };

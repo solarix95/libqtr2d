@@ -1,6 +1,6 @@
 #include "background.h"
-#include "pxszone.h"
-#include "pxsbody.h"
+#include "qtr2dzone.h"
+#include "qtr2dbody.h"
 #include <QLinearGradient>
 #include <QDebug>
 
@@ -11,7 +11,7 @@ Background::Background(GameMap *map)
 }
 
 //-------------------------------------------------------------------------------------------------
-bool Background::testCollision(PxsObject *bdy) const
+bool Background::testCollision(Qtr2dObject *bdy) const
 {
     QRectF colRect = bdy->collisionRect();
 

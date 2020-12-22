@@ -1,6 +1,6 @@
 #include "cameraform.h"
 #include "ui_cameraform.h"
-#include "pxscamerashakeeffect.h"
+#include "qtr2dcamerashakeeffect.h"
 
 //-------------------------------------------------------------------------------------------------
 CameraForm::CameraForm(QWidget *parent) :
@@ -15,7 +15,7 @@ CameraForm::CameraForm(QWidget *parent) :
     connect(ui->btnShake, SIGNAL(clicked(bool)), this, SLOT(shakeIt()));
     connect(ui->chkAntialias, SIGNAL(clicked(bool)), &mCamera, SLOT(setAntialiasingEnabled(bool)));
 
-    mCamera.setAspectMode(PxsCamera::AutoWidth);
+    mCamera.setAspectMode(Qtr2dCamera::AutoWidth);
     mZone.init();
 
     ui->pxswidget->setFocusPolicy(Qt::ClickFocus);
@@ -31,5 +31,5 @@ CameraForm::~CameraForm()
 //-------------------------------------------------------------------------------------------------
 void CameraForm::shakeIt()
 {
-    mCamera.appendEffect(new PxsCameraShakeEffect(2,2,0,1,2000));
+    mCamera.appendEffect(new Qtr2dCameraShakeEffect(2,2,0,1,2000));
 }

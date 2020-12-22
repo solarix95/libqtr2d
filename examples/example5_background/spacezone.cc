@@ -1,5 +1,5 @@
 
-#include "pxscamerashakeeffect.h"
+#include "qtr2dcamerashakeeffect.h"
 #include "spacezone.h"
 #include "asteroid.h"
 
@@ -23,5 +23,5 @@ void Spacezone::init()
 //-------------------------------------------------------------------------------------------------
 void Spacezone::createExplosion(const QPointF &pos, float force)
 {
-    emit requestCameraEffect(new PxsCameraShakeEffect(0.5,0.5,0.5,0,1000));
+    emit requestCameraEffect(new Qtr2dCameraShakeEffect(0.5,0.5,0.5,0,1000));
 }

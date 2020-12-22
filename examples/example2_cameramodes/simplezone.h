@@ -1,9 +1,9 @@
 #ifndef SIMPLEZONE_H
 #define SIMPLEZONE_H
 
-#include "pxszone.h"
+#include "qtr2dzone.h"
 
-class SimpleZone : public PxsZone
+class SimpleZone : public Qtr2dZone
 {
 public:
     SimpleZone();

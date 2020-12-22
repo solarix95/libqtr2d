@@ -1,11 +1,11 @@
 #include <QDebug>
 
 #include "bullet.h"
-#include "pxszone.h"
+#include "qtr2dzone.h"
 
 //-------------------------------------------------------------------------------------------------
-Bullet::Bullet(const QPointF &p, const QVector2D &v, PxsZone &zone)
- : PxsPolygonBody(p, zone)
+Bullet::Bullet(const QPointF &p, const QVector2D &v, Qtr2dZone &zone)
+ : Qtr2dPolygonBody(p, zone)
 {
     spin()     = (-10 + qrand()%20)/20.0;
     velocity() = v;
@@ -24,7 +24,7 @@ Bullet::Bullet(const QPointF &p, const QVector2D &v, PxsZone &zone)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Bullet::collideWith(PxsBody *other)
+void Bullet::collideWith(Qtr2dBody *other)
 {
     zone().createParticles(boundingRect(),velocity(),50,0.3,Qt::gray,5000);
     zone().createExplosion(pos(),5);

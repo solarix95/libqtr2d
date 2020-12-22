@@ -1,8 +1,8 @@
 #include "cameraform.h"
 #include "endlessspace.h"
 #include "ui_cameraform.h"
-#include "pxscamerashakeeffect.h"
-#include "pxsdebugbackground.h"
+#include "qtr2dcamerashakeeffect.h"
+#include "qtr2ddebugbackground.h"
 
 //-------------------------------------------------------------------------------------------------
 CameraForm::CameraForm(QWidget *parent) :
@@ -17,7 +17,7 @@ CameraForm::CameraForm(QWidget *parent) :
     connect(ui->btnShake, SIGNAL(clicked(bool)), this, SLOT(shakeIt()));
 
     mCamera.setAntialiasingEnabled(true);
-    mCamera.setAspectMode(PxsCamera::AutoWidth);
+    mCamera.setAspectMode(Qtr2dCamera::AutoWidth);
     mZone.appendBackground(new Endlessspace(400,300,70));
     mZone.init();
 
@@ -34,5 +34,5 @@ CameraForm::~CameraForm()
 //-------------------------------------------------------------------------------------------------
 void CameraForm::shakeIt()
 {
-    mCamera.appendEffect(new PxsCameraShakeEffect(2,2,0,0,2000));
+    mCamera.appendEffect(new Qtr2dCameraShakeEffect(2,2,0,0,2000));
 }

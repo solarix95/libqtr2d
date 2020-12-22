@@ -4,55 +4,55 @@
 
 QT += widgets
 
-!defined(PXS, var)  {
-    PXS = ../../libqtr2d
+!defined(QTR2dPATH, var)  {
+    QTR2dPATH = ../../libqtr2d
 }
 
-message( "Qtr2d is" $$PXS )
+message( "Qtr2d is" $$QTR2dPATH )
 
-INCLUDEPATH += $$PXS
+INCLUDEPATH += $$QTR2dPATH
 CONFIG      += c++11
 
 # Input
 HEADERS += \
-    $$PXS/pxswidget.h \
-    $$PXS/pxszone.h \
-    $$PXS/pxsobject.h \
-    $$PXS/pxsbody.h \
-    $$PXS/pxscamera.h \
-    $$PXS/pxsfollowcamera.h \
-    $$PXS/pxscameraeffect.h \
-    $$PXS/pxscamerashakeeffect.h \
-    $$PXS/pxspolygonbody.h \
-    $$PXS/pxsparticle.h \
-    $$PXS/pxsellipseparticle.h \
-    $$PXS/pxsbackground.h \
-    $$PXS/pxsdebugbackground.h \
-    $$PXS/pxsbrushbackground.h \
-    $$PXS/pxsgravity.h \
-    $$PXS/pxsmassattraction.h \
-    $$PXS/pxsgravitylist.h \
-    $$PXS/pxsbasetypes.h \
-    $$PXS/pxscamerarotateeffect.h
+    $$QTR2dPATH/qtr2dwidget.h \
+    $$QTR2dPATH/qtr2dzone.h \
+    $$QTR2dPATH/qtr2dobject.h \
+    $$QTR2dPATH/qtr2dbody.h \
+    $$QTR2dPATH/qtr2dcamera.h \
+    $$QTR2dPATH/qtr2dfollowcamera.h \
+    $$QTR2dPATH/qtr2dcameraeffect.h \
+    $$QTR2dPATH/qtr2dcamerashakeeffect.h \
+    $$QTR2dPATH/qtr2dpolygonbody.h \
+    $$QTR2dPATH/qtr2dparticle.h \
+    $$QTR2dPATH/qtr2dellipseparticle.h \
+    $$QTR2dPATH/qtr2dbackground.h \
+    $$QTR2dPATH/qtr2ddebugbackground.h \
+    $$QTR2dPATH/qtr2dbrushbackground.h \
+    $$QTR2dPATH/qtr2dgravity.h \
+    $$QTR2dPATH/qtr2dmassattraction.h \
+    $$QTR2dPATH/qtr2dgravitylist.h \
+    $$QTR2dPATH/qtr2dbasetypes.h \
+    $$QTR2dPATH/qtr2dcamerarotateeffect.h
 
 SOURCES += \
-    $$PXS/pxswidget.cc \
-    $$PXS/pxszone.cc \
-    $$PXS/pxsobject.cc \
-    $$PXS/pxsbody.cc \
-    $$PXS/pxscamera.cc \
-    $$PXS/pxsfollowcamera.cc \
-    $$PXS/pxscameraeffect.cc \
-    $$PXS/pxscamerashakeeffect.cc \
-    $$PXS/pxspolygonbody.cc \
-    $$PXS/pxsparticle.cc \
-    $$PXS/pxsellipseparticle.cc \
-    $$PXS/pxsbackground.cc \
-    $$PXS/pxsdebugbackground.cc \
-    $$PXS/pxsbrushbackground.cc \
-    $$PXS/pxsgravity.cc \
-    $$PXS/pxsmassattraction.cc \
-    $$PXS/pxsgravitylist.cc \
-    $$PXS/pxscamerarotateeffect.cc
+    $$QTR2dPATH/qtr2dwidget.cc \
+    $$QTR2dPATH/qtr2dzone.cc \
+    $$QTR2dPATH/qtr2dobject.cc \
+    $$QTR2dPATH/qtr2dbody.cc \
+    $$QTR2dPATH/qtr2dcamera.cc \
+    $$QTR2dPATH/qtr2dfollowcamera.cc \
+    $$QTR2dPATH/qtr2dcameraeffect.cc \
+    $$QTR2dPATH/qtr2dcamerashakeeffect.cc \
+    $$QTR2dPATH/qtr2dpolygonbody.cc \
+    $$QTR2dPATH/qtr2dparticle.cc \
+    $$QTR2dPATH/qtr2dellipseparticle.cc \
+    $$QTR2dPATH/qtr2dbackground.cc \
+    $$QTR2dPATH/qtr2ddebugbackground.cc \
+    $$QTR2dPATH/qtr2dbrushbackground.cc \
+    $$QTR2dPATH/qtr2dgravity.cc \
+    $$QTR2dPATH/qtr2dmassattraction.cc \
+    $$QTR2dPATH/qtr2dgravitylist.cc \
+    $$QTR2dPATH/qtr2dcamerarotateeffect.cc
 
 

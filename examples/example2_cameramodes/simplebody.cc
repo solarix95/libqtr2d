@@ -4,8 +4,8 @@
 #define LENGTH 10
 
 //-------------------------------------------------------------------------------------------------
-SimpleBody::SimpleBody(const QPointF &p, PxsZone &zone)
- : PxsBody(p,zone)
+SimpleBody::SimpleBody(const QPointF &p, Qtr2dZone &zone)
+ : Qtr2dBody(p,zone)
 {
     spin() = 0.1;
 }

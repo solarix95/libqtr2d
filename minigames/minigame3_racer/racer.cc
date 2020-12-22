@@ -8,8 +8,8 @@
 #define BROWN       QColor("#CD853F")
 
 //-------------------------------------------------------------------------------------------------
-Racer::Racer(const QPointF &p, PxsZone &zone)
- : PxsPolygonBody(p,zone)
+Racer::Racer(const QPointF &p, Qtr2dZone &zone)
+ : Qtr2dPolygonBody(p,zone)
  , mFireState(0)
  , mWheelPos(0)
  , mSteering(0)
@@ -62,7 +62,7 @@ bool Racer::move(double speed)
 
     if (velocity().length() > 0)
         angle() += mSteering * speed * 2;
-    return PxsPolygonBody::move(speed);
+    return Qtr2dPolygonBody::move(speed);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ void Racer::keyReleaseEvent(QKeyEvent *event)
 //-------------------------------------------------------------------------------------------------
 void Racer::renderModelCentered(QPainter &p) const
 {
-    PxsPolygonBody::renderModelCentered(p);
+    Qtr2dPolygonBody::renderModelCentered(p);
 
     renderWheel(p, QPointF(-4,-5));
     renderWheel(p, QPointF( 4,-5));

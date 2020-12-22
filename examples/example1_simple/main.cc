@@ -1,7 +1,7 @@
 
 #include <QApplication>
-#include "pxswidget.h"
-#include "pxscamera.h"
+#include "qtr2dwidget.h"
+#include "qtr2dcamera.h"
 #include "simplezone.h"
 
 int main(int argc, char *argv[])
@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     SimpleZone zone;
-    PxsCamera  cam(&zone);
-    PxsWidget  w(&cam);
+    Qtr2dCamera  cam(&zone);
+    Qtr2dWidget  w(&cam);
 
     zone.init();
 

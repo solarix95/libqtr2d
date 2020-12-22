@@ -1,14 +1,14 @@
 #ifndef RACER_H
 #define RACER_H
 
-#include "pxspolygonbody.h"
+#include "qtr2dpolygonbody.h"
 #include <QTimer>
 
-class Submarine : public PxsPolygonBody
+class Submarine : public Qtr2dPolygonBody
 {
     Q_OBJECT
 public:
-    Submarine(const QPointF &p, PxsZone &zone);
+    Submarine(const QPointF &p, Qtr2dZone &zone);
 
     virtual bool move(double speed) override;
     virtual void keyPressEvent(QKeyEvent *event) override;
@@ -17,7 +17,7 @@ public:
 protected:
     virtual void renderModelCentered(QPainter &p) const override;
     virtual void accelerate(double speed) override;
-    virtual void onCollision(PxsBody *other) override;
+    virtual void onCollision(Qtr2dBody *other) override;
 
 private slots:
     void bubble();
