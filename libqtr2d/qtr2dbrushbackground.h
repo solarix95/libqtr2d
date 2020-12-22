@@ -4,10 +4,10 @@
 #include <QBrush>
 #include "qtr2dbackground.h"
 
-class PxsBrushBackground : public Qtr2dBackground
+class Qtr2dBrushBackground : public Qtr2dBackground
 {
 public:
-    PxsBrushBackground(const QBrush &brush);
+    Qtr2dBrushBackground(const QBrush &brush);
 
 protected:
     virtual void renderBkgnd(QPainter &p, const QRectF &window);
