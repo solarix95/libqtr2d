@@ -42,6 +42,9 @@ public slots:
     void setWindow(const QSize &windowRect);
     void appendEffect(PxsCameraEffect *e);
 
+    // Aliases
+    inline void lookTo(float x, float y) { lookTo(QPointF(x,y)); }
+
 private slots:
     void onFieldSizeChange();
     void effectDestroyed(QObject *effect);

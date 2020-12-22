@@ -5,7 +5,7 @@
 TEMPLATE = app
 TARGET   = example1_simple
 INCLUDEPATH += .
-CONFIG      += debug
+CONFIG      += debug c++11
 
 include(../../libpixelschlacht/libpixelschlacht.pro)
 

@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QObject>
 #include <QPointF>
+#include <QKeyEvent>
 #include <QList>
 #include <QVector2D>
 #include "pxsobject.h"

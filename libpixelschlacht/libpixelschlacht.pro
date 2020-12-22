@@ -4,9 +4,14 @@
 
 QT += widgets
 
-PXS = ../../libpixelschlacht
+!defined(PXS, var)  {
+    PXS = ../../libpixelschlacht
+}
+
+message( "Pixelschlacht is" $$PXS )
 
 INCLUDEPATH += $$PXS
+CONFIG      += c++11
 
 # Input
 HEADERS += \
@@ -23,6 +28,7 @@ HEADERS += \
     $$PXS/pxsellipseparticle.h \
     $$PXS/pxsbackground.h \
     $$PXS/pxsdebugbackground.h \
+    $$PXS/pxsbrushbackground.h \
     $$PXS/pxsgravity.h \
     $$PXS/pxsmassattraction.h \
     $$PXS/pxsgravitylist.h \
@@ -43,8 +49,10 @@ SOURCES += \
     $$PXS/pxsellipseparticle.cc \
     $$PXS/pxsbackground.cc \
     $$PXS/pxsdebugbackground.cc \
+    $$PXS/pxsbrushbackground.cc \
     $$PXS/pxsgravity.cc \
     $$PXS/pxsmassattraction.cc \
     $$PXS/pxsgravitylist.cc \
     $$PXS/pxscamerarotateeffect.cc
+
 

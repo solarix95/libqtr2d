@@ -6,6 +6,7 @@
 #include <QTime>
 #include <QSizeF>
 #include <QPainter>
+#include <QKeyEvent>
 #include "pxsbody.h"
 #include "pxsparticle.h"
 

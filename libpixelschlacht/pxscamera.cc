@@ -43,6 +43,7 @@ void PxsCamera::lookTo(const QPointF &center)
     setupWorldMatrix();
 }
 
+
 //-------------------------------------------------------------------------------------------------
 void PxsCamera::rotate(float angle)
 {
