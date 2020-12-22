@@ -24,6 +24,7 @@ PxsCameraShakeEffect::PxsCameraShakeEffect(float ax, float ay, float az, float r
 //-------------------------------------------------------------------------------------------------
 void PxsCameraShakeEffect::process(QMatrix &matrix, const QRectF &window)
 {
+    Q_UNUSED(window);
     float prog = progress();
     matrix.translate(randomizeFloat(mAx*prog),
                      randomizeFloat(mAy*prog));

@@ -23,7 +23,7 @@ void Spacezone::init()
 }
 
 //-------------------------------------------------------------------------------------------------
-void Spacezone::createExplosion(const QPointF &pos, float force)
+void Spacezone::createExplosion(const QPointF &, float)
 {
     emit requestCameraEffect(new PxsCameraShakeEffect(0.5,0.5,0.5,0,1000));
 }

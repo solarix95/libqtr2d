@@ -8,7 +8,7 @@ INCLUDEPATH += .
 CONFIG      += debug
 QT          += widgets
 
-include(../../libpixelschlacht/libpixelschlacht.pro)
+include(../../libqtr2d/libqtr2d.pro)
 
 DEFINES += QT_DEPRECATED_WARNINGS
 

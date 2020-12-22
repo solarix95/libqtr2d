@@ -70,6 +70,8 @@ void PxsZone::createParticles(const QRectF &rect, const QVector2D &dir, int coun
 //-------------------------------------------------------------------------------------------------
 void PxsZone::createExplosion(const QPointF &pos, float force)
 {
+    Q_UNUSED(pos);
+    Q_UNUSED(force);
     // Subclassing..!
 }
 

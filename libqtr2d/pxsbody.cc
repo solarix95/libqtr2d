@@ -70,6 +70,7 @@ void PxsBody::testCollision(PxsBody *other)
         return;
     }
 
+    // TODO: Rect/Radial-Collision
     // Rect/Radial
     PxsBody *rectBody  = this->mCollisionType == RectCollision ? this : other;
     PxsBody *radialBody = rectBody == this ? other : this;

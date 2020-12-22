@@ -5,10 +5,10 @@
 QT += widgets
 
 !defined(PXS, var)  {
-    PXS = ../../libpixelschlacht
+    PXS = ../../libqtr2d
 }
 
-message( "Pixelschlacht is" $$PXS )
+message( "Qtr2d is" $$PXS )
 
 INCLUDEPATH += $$PXS
 CONFIG      += c++11

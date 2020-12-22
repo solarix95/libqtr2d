@@ -4,6 +4,7 @@
 #include <QString>
 #include <QRect>
 #include <QList>
+#include <QMap>
 #include <QPointF>
 #include <QPainter>
 
