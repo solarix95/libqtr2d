@@ -10,6 +10,7 @@ Qtr2dCamera::Qtr2dCamera(Qtr2dZone *zone, QObject *parent)
     , mCenter(0,0)
     , mRotation(0)
     , mAspectMode(IgnoreAspectRatio)
+    , mFieldOfViewMode(VirtualFov)
     , mAntialiasingEnabled(false)
 {
     setZone(zone);
@@ -106,11 +107,18 @@ void Qtr2dCamera::keyReleaseEvent(QKeyEvent *event)
 //-------------------------------------------------------------------------------------------------
 void Qtr2dCamera::setAspectMode(int mode)
 {
-    Q_ASSERT(mode >= IgnoreAspectRatio);
-    Q_ASSERT(mode <= AutoHeigh);
-
     mAspectMode = (AspectRatioMode)mode;
     setupWorldMatrix();
+}
+
+//-------------------------------------------------------------------------------------------------
+void Qtr2dCamera::setFieldOfViewMode(int mode)
+{
+    Q_ASSERT(mode >= VirtualFov);
+    Q_ASSERT(mode <= NativeFov);
+    mFieldOfViewMode = (FovMode)mode;
+    setupWorldMatrix();
+
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -137,6 +145,9 @@ void Qtr2dCamera::setupWorldMatrix()
 {
     if (mProjectionRect.isEmpty() || mTargetWindowRect.isEmpty())
         return;
+
+    if (mFieldOfViewMode == NativeFov)
+        mTargetWindowRect = mProjectionRect.size();
 
     switch(mAspectMode) {
     case IgnoreAspectRatio: {

@@ -21,6 +21,11 @@ public:
         AutoHeigh          // Calculate windowRect.height();
     };
 
+    enum FovMode {
+        VirtualFov,        // Free camera window
+        NativeFov          // projectionRect == windowRect
+    };
+
     explicit Qtr2dCamera(Qtr2dZone *zone = NULL, QObject *parent = NULL);
 
     void    setProjectionRect(const QRect &projection);
@@ -35,6 +40,7 @@ signals:
 
 public slots:
     void setAspectMode(int mode);
+    void setFieldOfViewMode(int mode);
     void setAntialiasingEnabled(bool enabled);
     void setZone(Qtr2dZone *zone);
     void lookTo(const QPointF &center);
@@ -60,6 +66,7 @@ private:
     QRectF          mCurrentWindowRect;
     float           mRotation;
     AspectRatioMode mAspectMode;
+    FovMode         mFieldOfViewMode;
     bool            mAntialiasingEnabled;
 
     QMatrix         mMatrix;

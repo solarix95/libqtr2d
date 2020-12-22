@@ -33,7 +33,8 @@ HEADERS += \
     $$QTR2dPATH/qtr2dmassattraction.h \
     $$QTR2dPATH/qtr2dgravitylist.h \
     $$QTR2dPATH/qtr2dbasetypes.h \
-    $$QTR2dPATH/qtr2dcamerarotateeffect.h
+    $$QTR2dPATH/qtr2dcamerarotateeffect.h \
+    $$QTR2dPATH/qtr2dsprite.h
 
 SOURCES += \
     $$QTR2dPATH/qtr2dwidget.cc \
@@ -53,6 +54,7 @@ SOURCES += \
     $$QTR2dPATH/qtr2dgravity.cc \
     $$QTR2dPATH/qtr2dmassattraction.cc \
     $$QTR2dPATH/qtr2dgravitylist.cc \
-    $$QTR2dPATH/qtr2dcamerarotateeffect.cc
+    $$QTR2dPATH/qtr2dcamerarotateeffect.cc \
+    $$QTR2dPATH/qtr2dsprite.cc
 
 
