@@ -4,7 +4,7 @@
 #include <QList>
 #include <QVector2D>
 
-typedef QVector2D        PxsForce;
-typedef QList<QVector2D> PxsForces;
+typedef QVector2D        Qtr2dForce;
+typedef QList<QVector2D> Qtr2dForces;
 
 #endif // PXSBASETYPES_H

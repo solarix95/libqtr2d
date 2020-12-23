@@ -37,6 +37,15 @@ void Qtr2dZone::render(QPainter &p, const QRectF &window)
 }
 
 //-------------------------------------------------------------------------------------------------
+void Qtr2dZone::clear()
+{
+    mInputBody = nullptr;
+    qDeleteAll(mBodies);
+    mBodies.clear();
+    mParticles.clear();
+}
+
+//-------------------------------------------------------------------------------------------------
 void Qtr2dZone::keyPressEvent(QKeyEvent *event)
 {
     if (mInputBody)

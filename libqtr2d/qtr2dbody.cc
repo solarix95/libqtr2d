@@ -14,7 +14,7 @@ Qtr2dBody::Qtr2dBody(const QPointF &p, Qtr2dZone &zone)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Qtr2dBody::addGravity(const PxsForce &f)
+void Qtr2dBody::addGravity(const Qtr2dForce &f)
 {
     mGravity.setX(mGravity.x() + f.x());
     mGravity.setY(mGravity.y() + f.y());
@@ -33,7 +33,7 @@ bool Qtr2dBody::move(double speed)
     updatePosition(newPos);
     testCollision();
 
-    mGravity = PxsForce(0,0);
+    mGravity = Qtr2dForce(0,0);
     return false;
 }
 
@@ -92,7 +92,7 @@ void Qtr2dBody::onCollision(Qtr2dBody *)
 }
 
 //-------------------------------------------------------------------------------------------------
-PxsForce Qtr2dBody::collectForces() const
+Qtr2dForce Qtr2dBody::collectForces() const
 {
     /*
     PxsForces f;
@@ -102,7 +102,7 @@ PxsForce Qtr2dBody::collectForces() const
 
     f << PxsForce(m.dx(),m.dy());
     */
-    PxsForce next;
+    Qtr2dForce next;
     return next;
     /*
     foreach(PxsBody *other, mFriends) {
@@ -118,13 +118,13 @@ PxsForce Qtr2dBody::collectForces() const
 }
 
 //-------------------------------------------------------------------------------------------------
-PxsForce Qtr2dBody::gravityTo(Qtr2dBody *other) const
+Qtr2dForce Qtr2dBody::gravityTo(Qtr2dBody *other) const
 {
     if (this == other)
-        return PxsForce();
+        return Qtr2dForce();
 
     QPointF v = other->pos() - this->pos();
-    PxsForce f(v.x(),v.y());
+    Qtr2dForce f(v.x(),v.y());
     float d = f.length();
     float g = this->mMass/(d*d);
     // float g = qMin(this->mMass/(d*d),.5f);

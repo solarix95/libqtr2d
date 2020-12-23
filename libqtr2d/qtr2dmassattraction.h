@@ -6,7 +6,7 @@
 class Qtr2dMassAttraction : public Qtr2dGravity
 {
 public:
-    virtual void process(PxsBodies &bodies, PxsParticles &particles);
+    virtual void process(Qtr2dBodies &bodies, PxsParticles &particles);
 
 };
 

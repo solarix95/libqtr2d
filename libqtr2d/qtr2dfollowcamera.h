@@ -18,6 +18,7 @@ public:
 
     Qtr2dFollowCamera(Qtr2dZone *zone = NULL, QObject *parent = NULL);
 
+public slots:
     void followObject(const Qtr2dObject *obj,Options options = FollowPosition);
 
 private slots:

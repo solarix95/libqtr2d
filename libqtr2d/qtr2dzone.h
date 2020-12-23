@@ -24,8 +24,9 @@ public:
     void render(QPainter &p, const QRectF &window);
 
     virtual void init() = 0; // create bodies, setup game, ...
+    virtual void clear();
 
-    inline const PxsBodies    &bodies() const     { return mBodies;     }
+    inline const Qtr2dBodies    &bodies() const     { return mBodies;     }
     inline const PxsParticles &particles() const  { return mParticles;  }
     inline const QSize        &fieldSize() const  { return mFieldSize;  }
     inline QRect               fieldRect() const  { return QRect(0,0,mFieldSize.width(),mFieldSize.height()); }
@@ -72,9 +73,9 @@ private slots:
 private:
     void updateGravity();
 
-    PxsBodies      mBodies;
+    Qtr2dBodies      mBodies;
     Qtr2dBody       *mInputBody;
-    PxsParticles   mParticles;
+    PxsParticles     mParticles;
     Qtr2dBackground *mBackground;
     Qtr2dGravity    *mGravity;
 

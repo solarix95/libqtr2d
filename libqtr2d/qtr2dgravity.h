@@ -8,7 +8,7 @@ class Qtr2dGravity
 {
 public:
     virtual ~Qtr2dGravity();
-    virtual void process(PxsBodies &bodies, PxsParticles &particles) = 0;
+    virtual void process(Qtr2dBodies &bodies, PxsParticles &particles) = 0;
 };
 
 #endif // PXSGRAVITY_H

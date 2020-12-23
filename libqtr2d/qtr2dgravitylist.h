@@ -7,15 +7,15 @@
 class Qtr2dGravityList : public Qtr2dGravity
 {
 public:
-    Qtr2dGravityList(const PxsForces &forces);
-    Qtr2dGravityList(const PxsForce &force);
-    virtual void process(PxsBodies &bodies, PxsParticles &particles) override;
+    Qtr2dGravityList(const Qtr2dForces &forces);
+    Qtr2dGravityList(const Qtr2dForce &force);
+    virtual void process(Qtr2dBodies &bodies, PxsParticles &particles) override;
 
-    inline PxsForces &forces() { return mForces; }
+    inline Qtr2dForces &forces() { return mForces; }
 
 private:
 
-    PxsForces mForces;
+    Qtr2dForces mForces;
 
 };
 

@@ -16,9 +16,9 @@ class Qtr2dBody : public Qtr2dObject
 public:
     explicit Qtr2dBody(const QPointF &p, Qtr2dZone &zone);
 
-    virtual void     addGravity(const PxsForce &f);
+    virtual void     addGravity(const Qtr2dForce &f);
     virtual bool     move(double speed);
-    virtual PxsForce gravityTo(Qtr2dBody *other) const;
+    virtual Qtr2dForce gravityTo(Qtr2dBody *other) const;
 
     // Input Events
     virtual void keyPressEvent(QKeyEvent *event);
@@ -32,9 +32,9 @@ protected:
     void collideWith(Qtr2dBody *other);
     virtual void onCollision(Qtr2dBody *other);
 
-    virtual PxsForce collectForces() const;
+    virtual Qtr2dForce collectForces() const;
 
-    PxsForce  mGravity;
+    Qtr2dForce  mGravity;
     float     mAcceleration;
     float     mMass;
 
@@ -47,6 +47,6 @@ protected:
     float         mCollisionRadius;
 };
 
-typedef QList<Qtr2dBody*> PxsBodies;
+typedef QList<Qtr2dBody*> Qtr2dBodies;
 
 #endif

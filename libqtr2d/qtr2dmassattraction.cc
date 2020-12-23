@@ -1,8 +1,8 @@
 #include "qtr2dmassattraction.h"
 
-void Qtr2dMassAttraction::process(PxsBodies &bodies, PxsParticles &)
+void Qtr2dMassAttraction::process(Qtr2dBodies &bodies, PxsParticles &)
 {
-    PxsForce g;
+    Qtr2dForce g;
     for (int i=0; i<bodies.count(); i++) {
         Qtr2dBody *o = bodies.at(i);
         for (int j=i+1; j<bodies.count(); j++) {
