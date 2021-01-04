@@ -23,7 +23,8 @@ void Qtr2dObject::render(QPainter &p) const
 
     p.restore();
 
-    /* Debug
+    /* Debug */
+    /*
     p.save();
     p.setBrush(Qt::transparent);
     p.setPen(QPen(Qt::blue,0.3));
