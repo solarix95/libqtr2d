@@ -27,6 +27,9 @@ signals:
 
 public slots:
 
+private slots:
+    void menuDestroyed(QObject *menu);
+
 private:
     Qtr2dCamera *mCamera;
     Qtr2dMenu   *mMenu;

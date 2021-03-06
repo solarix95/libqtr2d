@@ -36,6 +36,7 @@ public:
     Qtr2dOptionMenu(Qtr2dMenuStyle &style, const Qtr2dMenuOptions &options = Qtr2dMenuOptions());
 
     virtual QSize size() const;
+    const Qtr2dMenuOption &option(int index) const;
 
 signals:
     void selected(int index);
@@ -45,6 +46,8 @@ protected:
     virtual void keyPressEvent(QKeyEvent *event);
 
 private:
+    QSize optionsMaxSize() const;
+
     Qtr2dMenuOptions mOptions;
     int              mCurrentIndex;
 };

@@ -72,6 +72,13 @@ void Qtr2dWidget::keyReleaseEvent(QKeyEvent *event)
 }
 
 //-------------------------------------------------------------------------------------------------
+void Qtr2dWidget::menuDestroyed(QObject *menu)
+{
+    if (menu == (QObject*)mMenu)
+        mMenu = nullptr;
+}
+
+//-------------------------------------------------------------------------------------------------
 void Qtr2dWidget::setCamera(Qtr2dCamera *camera)
 {
     mCamera = camera;
@@ -87,6 +94,7 @@ void Qtr2dWidget::setMenu(Qtr2dMenu *menu)
 {
     mMenu = menu;
     connect(mMenu, SIGNAL(updateRequest()), this, SLOT(update()));
+    connect(mMenu, SIGNAL(destroyed(QObject*)), this, SLOT(menuDestroyed(QObject*)));
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -39,7 +39,8 @@ HEADERS += \
     $$QTR2dPATH/qtr2dmenu.h \
     $$QTR2dPATH/qtr2doptionmenu.h \
     $$QTR2dPATH/qtr2dmenustyle.h \
-    $$QTR2dPATH/qtr2dsimplemenustyle.h
+    $$QTR2dPATH/qtr2dsimplemenustyle.h \
+    $$QTR2dPATH/qtr2dwin311menustyle.h
 
 SOURCES += \
     $$QTR2dPATH/qtr2dwidget.cc \
@@ -64,6 +65,7 @@ SOURCES += \
     $$QTR2dPATH/qtr2dmenu.cc \
     $$QTR2dPATH/qtr2doptionmenu.cc \
     $$QTR2dPATH/qtr2dmenustyle.cc \
-    $$QTR2dPATH/qtr2dsimplemenustyle.cc
+    $$QTR2dPATH/qtr2dsimplemenustyle.cc \
+    $$QTR2dPATH/qtr2dwin311menustyle.cc
 
 

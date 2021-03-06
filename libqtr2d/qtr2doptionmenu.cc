@@ -50,27 +50,43 @@ Qtr2dOptionMenu::Qtr2dOptionMenu(Qtr2dMenuStyle &style,const Qtr2dMenuOptions &o
 QSize Qtr2dOptionMenu::size() const
 {
 
-    int maxOptionWidth = 0;
-    int optionsHeight  = 0;
-    for(auto option : mOptions) {
-        maxOptionWidth = qMax(maxOptionWidth,option.size().width());
-        optionsHeight += option.size().height();
-    }
-    optionsHeight += (mOptions.count() - 1) * SPACING;
-    return QSize(2*style().border() + 2*style().padding() + maxOptionWidth,
-                 2*style().border() + 2*style().padding() + optionsHeight);
+    QSize optionSize = optionsMaxSize();
+
+    int optionsSpacing     = (mOptions.count() - 1) * SPACING;
+    int optionsTotalHeight = mOptions.count() * optionSize.height() + optionsSpacing;
+
+    return QSize(2*style().border() + 2*style().padding() + optionSize.width() + 2,
+                 2*style().border() + 2*style().padding() + optionsTotalHeight);
+}
+
+//-------------------------------------------------------------------------------------------------
+const Qtr2dMenuOption &Qtr2dOptionMenu::option(int index) const
+{
+    Q_ASSERT(index >= 0 && index < mOptions.count());
+    return mOptions[index];
 }
 
 //-------------------------------------------------------------------------------------------------
 void Qtr2dOptionMenu::renderContent(QPainter &p, const QSize &boxSize)
 {
-    p.translate(style().padding(),style().padding());
+    p.translate(style().padding() + style().border(),style().padding());
     p.setPen(QPen(Qt::black,1));
 
     int index = 0;
+    QSize optionSize = optionsMaxSize();
+
     for(const auto &option : mOptions) {
-        QRect optionRect = QRect(0,0,option.size().width(), option.size().height());
-        p.drawText(optionRect,option.text());
+        p.save();
+        QRect optionRect = QRect(0,0,optionSize.width(), optionSize.height());
+        QPixmap icon = option.icon();
+        if (!icon.isNull()) {
+            p.drawPixmap(0,0,icon);
+            p.translate(icon.width() + style().padding(),0);
+        }
+
+        p.drawText(optionRect,Qt::AlignVCenter | Qt::AlignLeft, option.text());
+        p.restore();
+
         if (index == mCurrentIndex) {
             p.save();
             p.setPen(Qt::blue);
@@ -102,6 +118,24 @@ void Qtr2dOptionMenu::keyPressEvent(QKeyEvent *event)
         emit updateRequest();
     }
 
+    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter || event->key() == Qt::Key_Space) {
+        if (mCurrentIndex >= 0 && mCurrentIndex < mOptions.count()) {
+            emit selected(mCurrentIndex);
+        }
+    }
+
+}
+
+//-------------------------------------------------------------------------------------------------
+QSize Qtr2dOptionMenu::optionsMaxSize() const
+{
+    QSize optionSize;
+    for(const auto &option : mOptions) {
+        optionSize.setHeight(qMax(optionSize.height(),option.size().height()));
+        optionSize.setWidth(qMax(optionSize.width(), option.size().width()));
+    }
+
+    return optionSize;
 }
 
 
